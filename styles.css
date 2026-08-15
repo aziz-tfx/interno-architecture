@@ -247,6 +247,13 @@ html[lang="uz"] .logo__img--uz{display:block}
   -webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 0 22px rgba(247,107,43,.4));
 }
+/* Кинетическая типографика оборачивает буквы в inline-block спаны —
+   background-clip:text родителя через них не прокрашивается, поэтому
+   градиент назначаем каждой букве отдельно (как на homepage школы). */
+.hero__title em .k-letter{
+  background:linear-gradient(100deg,var(--orange-soft) 0%,var(--orange) 55%,#ffb488 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
 .hero__subtitle{max-width:540px;color:#bbb;font-size:15px;line-height:1.55;margin-bottom:20px}
 .hero__lesson{margin:-4px 0 22px}
 .trust-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px}
@@ -341,6 +348,31 @@ section{position:relative}
 .ticker span i{font-style:normal;color:var(--orange)}
 @keyframes ticker{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.ticker__track{animation:none}}
+
+/* ===== DEMAND: востребованность ===== */
+.demand{padding:96px 0 24px}
+.demand__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:36px 0 8px}
+.demand-card{
+  border-radius:24px;padding:30px 26px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;
+}
+.demand-card:hover{
+  transform:translateY(-6px);
+  --glass-border-bright:rgba(247,107,43,.6);
+  --glass-border-dim:rgba(247,107,43,.22);
+  box-shadow:inset 0 1px 1px var(--glass-shadow-inset),0 18px 44px rgba(0,0,0,.5),0 0 44px rgba(247,107,43,.1);
+}
+.demand-card__num{
+  font-family:'Unbounded';font-weight:800;
+  font-size:clamp(24px,2.6vw,36px);line-height:1.05;letter-spacing:-.02em;
+  color:var(--orange);
+}
+.demand-card__lbl{font-size:13.5px;color:var(--muted);line-height:1.5}
+.demand-card--accent{background:var(--orange);color:var(--ink)}
+.demand-card--accent .demand-card__num{color:var(--ink)}
+.demand-card--accent .demand-card__lbl{color:rgba(0,0,0,.68)}
+.demand__note{margin-top:18px;font-size:14px;color:#ddd;font-weight:500;text-align:center}
 
 /* ===== FEARS ===== */
 .fear{padding:96px 0}
@@ -807,6 +839,7 @@ label.has-error .phone-error{display:block}
 @media (max-width:1080px){
   .bento{grid-template-columns:repeat(2,1fr)}
   .bento__card--lg{grid-column:span 2;grid-row:span 1}
+  .demand__grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:980px){
   .nav__links{display:none}
@@ -835,16 +868,23 @@ label.has-error .phone-error{display:block}
   .city-select{padding:6px 24px 6px 10px;font-size:11px;background-position:right 8px center}
 
   .hero__badge{margin-bottom:18px;font-size:10px;padding:6px 12px}
-  .hero__title{font-size:clamp(28px,7.5vw,44px);margin-bottom:14px;letter-spacing:-.02em;line-height:1.05}
+  .hero__title{font-size:clamp(30px,8.4vw,46px);margin-bottom:14px;letter-spacing:-.02em;line-height:1.05}
   .hero__subtitle{font-size:14px;margin-bottom:16px}
-  .trust-chips{gap:6px;margin-bottom:20px}
-  .trust-chip{padding:5px 10px;font-size:10px}
+  /* Мобильный hero — без перегруза: чипы и вторичные строки скрываем,
+     остаются заголовок, подзаголовок, дата урока и CTA. */
+  .trust-chips,.hero__social,.hero__microcopy{display:none}
   .hero__actions{flex-direction:column;align-items:stretch;width:100%}
   .hero__actions .btn{justify-content:center;width:100%}
   .hero-dims{display:none}
 
   .fear,.benefits,.program,.works,.quiz{padding:56px 0 48px}
   .gifts,.showreel,.mentor,.model3d,.salary,.why,.faq{padding:48px 0}
+  .demand{padding:56px 0 8px}
+  .demand__grid{grid-template-columns:1fr 1fr;gap:8px}
+  .demand-card{padding:20px 18px;border-radius:18px}
+  .demand-card__num{font-size:20px}
+  .demand-card__lbl{font-size:12px}
+  .demand__note{font-size:13px}
   .cta{padding:48px 0 24px}
 
   .display{font-size:clamp(28px,7vw,42px);line-height:1.05}

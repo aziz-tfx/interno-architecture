@@ -4,11 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Открытый урок по архитектуре · INTERNO School · Ташкент / Самарканд / Фергана</title>
-<meta name="description" content="Бесплатный открытый урок INTERNO School. Спроектируйте концепцию своего первого дома в ArchiCAD за 1 час. Архитектор-практик · 10+ лет опыта." />
+<meta name="description" content="Бесплатный открытый урок INTERNO School: быстрый старт в архитектуре, первый проект в Revit за 1 час и реальные цифры дохода в Узбекистане." />
 <link rel="canonical" href="https://architecture.interno.school/" />
 <link rel="icon" type="image/svg+xml" href="logo-ru.svg" />
 <meta property="og:title" content="Открытый урок по архитектуре — INTERNO School" />
-<meta property="og:description" content="За 1 час — концепция вашего первого здания в ArchiCAD + 3 подарка." />
+<meta property="og:description" content="Быстрый старт в архитектуре: за 1 час — первый проект в Revit + честные цифры дохода. 3 подарка каждому." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://architecture.interno.school/" />
 <meta property="og:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093319_a188b5d9-b4cf-4c1e-bd6f-57374f48c514.png" />
@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="INTERNO School" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Открытый урок по архитектуре — INTERNO School" />
-<meta name="twitter:description" content="За 1 час — концепция вашего первого здания в ArchiCAD + 3 подарка." />
+<meta name="twitter:description" content="Быстрый старт в архитектуре: за 1 час — первый проект в Revit + честные цифры дохода. 3 подарка каждому." />
 <meta name="twitter:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093319_a188b5d9-b4cf-4c1e-bd6f-57374f48c514.png" />
 
 <!-- ===== BOOT + I18N =====
@@ -60,8 +60,8 @@ const dict = {
     "nav.fit":"Подойдёт?","nav.program":"Программа","nav.mentor":"Спикер","nav.works":"Работы","nav.faq":"FAQ","nav.signup":"Записаться",
     "nav.cityAria":"Город",
     "hero.eyebrow":"Бесплатный открытый урок · курс «Архитектура»",
-    "hero.title1":"Спроектируйте своё","hero.title2":"первое здание","hero.title3":"за 1 вечер. <em>Бесплатно.</em>",
-    "hero.subtitle":"За 60 минут создадите концепцию собственного дома в ArchiCAD, узнаете сколько зарабатывают архитекторы в Узбекистане — и поймёте, ваша ли это профессия.",
+    "hero.title1":"Быстрый старт","hero.title2":"в архитектуре.","hero.title3":"Доход — через <em>6 месяцев.</em>",
+    "hero.subtitle":"Бесплатный урок: за 1 час сделаете первый проект в Revit и узнаете, сколько платят архитекторам в Узбекистане в 2026.",
     "hero.cta":"Записаться бесплатно","hero.cta2":"Программа урока",
     "hero.social":"2400+ выпускников школы · 8 лет · менторы-практики",
     "hero.micro":"🔒 Без спама. Дату и время согласуем при подтверждении.",
@@ -70,19 +70,33 @@ const dict = {
     "trust.t1":"8 лет на рынке","trust.t2":"2400+ выпускников","trust.t3":"Архитектор-практик","trust.t4":"3 города Узбекистана",
     "ticker.t1":"60 минут практики","ticker.t2":"Концепция дома с нуля","ticker.t3":"3 подарка каждому",
 
+    "dem.kicker":"Востребованность профессии",
+    "dem.title":"Узбекистан строится.<br/><span class=\"accent\">Архитекторы нужны как никогда.</span>",
+    "dem.lead":"Строительный бум — один из главных драйверов экономики страны. Проектов больше, чем специалистов, которые умеют их делать.",
+    "dem.c1n":"Янги Тошкент",
+    "dem.c1":"новый город на 2,5 млн жителей проектируется и строится прямо сейчас",
+    "dem.c2n":"×3",
+    "dem.c2":"выросли объёмы строительства в Узбекистане за последние 10 лет",
+    "dem.c3n":"1000+",
+    "dem.c3":"вакансий для архитекторов, проектировщиков и визуализаторов на hh.uz и OLX",
+    "dem.c4n":"Global",
+    "dem.c4":"визуализаторы из Узбекистана берут заказы студий США и Европы на Upwork — доход в валюте",
+    "dem.note":"На открытом уроке разберём, какие ниши сейчас самые денежные — от частных домов до BIM-проектирования.",
+    "dem.cta":"Занять место на уроке",
+
     "fear.kicker":"3 мифа, которые останавливают 90% людей",
     "fear.title":"«Архитектура — это не для меня».",
     "fear.title2":"Разберём все 3 мифа за один вечер.",
     "fear.q1":"«Я не умею рисовать»",
     "fear.a1":"Современный архитектор проектирует в программах. <b>Логика, пространство и насмотренность</b> важнее академического рисунка — а их мы развиваем на курсе.",
     "fear.q2":"«Черчение и программы — это сложно»",
-    "fear.a2":"За <b>1 час</b> открытого урока вы сделаете концепцию дома в ArchiCAD — стены, окна, крыша и 3D-вид. Спикер покажет каждый клик.",
+    "fear.a2":"За <b>1 час</b> открытого урока вы сделаете концепцию дома в Revit — стены, окна, крыша и 3D-вид. Спикер покажет каждый клик.",
     "fear.q3":"«Учиться на архитектора — 5–6 лет в вузе»",
     "fear.a3":"Проектировать частные дома и интерьерные объекты можно научиться за <b>6 месяцев практики</b>. Диплом вуза не нужен, чтобы брать первые коммерческие заказы.",
 
     "ben.title":"За 1 час на открытом уроке",
     "ben.kicker":"Что вы унесёте с собой",
-    "ben.b1t":"Первый проект в ArchiCAD",
+    "ben.b1t":"Первый проект в Revit",
     "ben.b1d":"Концепция дома: план, стены, окна, крыша и 3D-визуализация. Файл заберёте в портфолио.",
     "ben.b2t":"Профессия изнутри",
     "ben.b2d":"Чем занимается архитектор в Узбекистане: частные дома, кафе, жилые комплексы.",
@@ -108,23 +122,23 @@ const dict = {
     "prog.kicker":"Тайминг вечера",
     "prog.title":"Программа открытого урока","prog.mins":"· 60 мин",
     "t1.t":"Знакомство и рынок 2026","t1.d":"Куда идёт спрос: частные дома, HoReCa, жилые комплексы — и сколько за это платят.",
-    "t2.t":"ArchiCAD: установка и интерфейс","t2.d":"Работаете на своём ноутбуке или нашем — мы обеспечим место.",
+    "t2.t":"Revit: установка и интерфейс","t2.d":"Работаете на своём ноутбуке или нашем — мы обеспечим место.",
     "t3.t":"Проектируем концепцию дома с нуля","t3.d":"Стены, окна, крыша, 3D-вид — под руководством архитектора. Файл унесёте с собой.",
     "t4.t":"Как выйти на первый заказ","t4.d":"Где искать клиентов, сколько стоит проект дома и визуализация для новичка.",
     "t5.t":"Q&A — задаёте любые вопросы","t5.d":"Лично или через Zoom — для онлайн-формата.",
-    "prog.note":"📌 Возьмите ноутбук — ArchiCAD установим вместе. Если ноутбука нет — обеспечим компьютер на месте.",
+    "prog.note":"📌 Возьмите ноутбук — Revit установим вместе. Если ноутбука нет — обеспечим компьютер на месте.",
 
     "video.kicker":"Из чертежа — в здание",
     "video.title":"Так выглядит работа архитектора",
     "video.lead":"От первой линии на плане до фотореалистичной визуализации — весь путь вы пройдёте на курсе. Первый шаг сделаете уже на открытом уроке.",
-    "video.chip":"ARCHICAD → 3D",
+    "video.chip":"REVIT → 3D",
 
     "m.kicker":"Спикер открытого урока",
     "m.name":"Тимур Рахимов",
     "m.role":"Архитектор-практик · ведущий ментор курса «Архитектура» в INTERNO School",
     "m.l1":"10+ лет проектирования жилых и общественных зданий",
     "m.l2":"40+ реализованных объектов в Ташкенте и Самарканде",
-    "m.l3":"Эксперт по ArchiCAD, AutoCAD и 3ds Max",
+    "m.l3":"Эксперт по Revit, AutoCAD и 3ds Max",
     "m.l4":"Обучил 300+ студентов проектированию с нуля",
     "m.quote":"«Я не буду продавать вам курс. За час вы своими руками соберёте концепцию дома и увидите, как думает архитектор. Зацепит — приходите учиться. Нет — у вас останется первый проект и честное понимание профессии.»",
     "m.cta":"Записаться к Тимуру",
@@ -195,7 +209,7 @@ const dict = {
     "cta.title":"Места на ближайший урок заканчиваются",
     "cd.d":"дней","cd.h":"часов","cd.m":"мин","cd.s":"сек",
     "prog.of":"из","prog.spots":"мест занято",
-    "cta.b1":"✓ 1 час практики в ArchiCAD + Q&A","cta.b2":"✓ PDF-гайд + чек-лист в подарок","cta.b3":"✓ Скидка 20% на основной курс",
+    "cta.b1":"✓ 1 час практики в Revit + Q&A","cta.b2":"✓ PDF-гайд + чек-лист в подарок","cta.b3":"✓ Скидка 20% на основной курс",
     "form.name":"Имя","form.phone":"Телефон","form.city":"Город","form.lang":"Язык",
     "form.opt1":"Русский","form.opt2":"Узбекский",
     "form.consent":"Согласен на обработку персональных данных",
@@ -213,7 +227,7 @@ const dict = {
     "modal.eyebrow":"Бесплатный открытый урок",
     "modal.title":"Запишитесь на ближайший урок",
     "modal.lead":"Менеджер свяжется с вами в течение 15 минут — подтвердит место, дату и время.",
-    "modal.b1":"✓ 1 час практики в ArchiCAD + Q&A",
+    "modal.b1":"✓ 1 час практики в Revit + Q&A",
     "modal.b2":"✓ PDF-гайд + чек-лист в подарок",
     "modal.b3":"✓ Скидка 20% на основной курс",
   },
@@ -221,8 +235,8 @@ const dict = {
     "nav.fit":"To‘g‘ri keladimi?","nav.program":"Dastur","nav.mentor":"Spiker","nav.works":"Ishlar","nav.faq":"Savollar","nav.signup":"Yozilish",
     "nav.cityAria":"Shahar",
     "hero.eyebrow":"Bepul ochiq dars · «Arxitektura» kursi",
-    "hero.title1":"Birinchi binoyingizni","hero.title2":"bir oqshomda","hero.title3":"loyihalang. <em>Bepul.</em>",
-    "hero.subtitle":"60 daqiqada ArchiCAD dasturida o‘z uyingiz konsepsiyasini yaratasiz, O‘zbekistonda arxitektorlar qancha topishini bilasiz — va bu kasb sizniki ekanini tushunasiz.",
+    "hero.title1":"Arxitekturada","hero.title2":"tez start.","hero.title3":"Daromad — <em>6 oyda.</em>",
+    "hero.subtitle":"Bepul dars: 1 soatda Revit’da birinchi loyihangizni qilasiz va 2026-yilda O‘zbekistonda arxitektorlarga qancha to‘lashini bilasiz.",
     "hero.cta":"Bepul yozilish","hero.cta2":"Dars dasturi",
     "hero.social":"Maktabning 2400+ bitiruvchisi · 8 yil · amaliyotchi mentorlar",
     "hero.micro":"🔒 Spam yo‘q. Sana va vaqtni tasdiqlashda kelishamiz.",
@@ -231,19 +245,33 @@ const dict = {
     "trust.t1":"Bozorda 8 yil","trust.t2":"2400+ bitiruvchi","trust.t3":"Amaliyotchi arxitektor","trust.t4":"O‘zbekistonning 3 shahri",
     "ticker.t1":"60 daqiqa amaliyot","ticker.t2":"Uy konsepsiyasi noldan","ticker.t3":"Har kimga 3 ta sovg‘a",
 
+    "dem.kicker":"Kasbning talabgirligi",
+    "dem.title":"O‘zbekiston qurilmoqda.<br/><span class=\"accent\">Arxitektorlar har qachongidan ham kerak.</span>",
+    "dem.lead":"Qurilish bumi — mamlakat iqtisodiyotining asosiy drayverlaridan biri. Loyihalar ularni qila oladigan mutaxassislardan ko‘p.",
+    "dem.c1n":"Yangi Toshkent",
+    "dem.c1":"2,5 mln aholiga mo‘ljallangan yangi shahar hozir loyihalanmoqda va qurilmoqda",
+    "dem.c2n":"×3",
+    "dem.c2":"so‘nggi 10 yilda O‘zbekistonda qurilish hajmi shuncha o‘sdi",
+    "dem.c3n":"1000+",
+    "dem.c3":"hh.uz va OLX’da arxitektor, loyihachi va vizualizatorlar uchun vakansiyalar",
+    "dem.c4n":"Global",
+    "dem.c4":"o‘zbekistonlik vizualizatorlar Upwork orqali AQSh va Yevropa studiyalaridan buyurtma oladi — daromad valyutada",
+    "dem.note":"Ochiq darsda hozir eng daromadli yo‘nalishlarni tahlil qilamiz — xususiy uylardan BIM-loyihalashgacha.",
+    "dem.cta":"Darsdan joy olish",
+
     "fear.kicker":"90% odamni to‘xtatadigan 3 ta afsona",
     "fear.title":"«Arxitektura — men uchun emas».",
     "fear.title2":"3 ta afsonani bir oqshomda tahlil qilamiz.",
     "fear.q1":"«Men rasm chiza olmayman»",
     "fear.a1":"Zamonaviy arxitektor dasturlarda loyihalaydi. Akademik rasmdan ko‘ra <b>mantiq, makon hissi va ko‘nikma</b> muhimroq — bularni kursda rivojlantiramiz.",
     "fear.q2":"«Chizmachilik va dasturlar qiyin»",
-    "fear.a2":"Ochiq darsning <b>1 soatida</b> ArchiCAD’da uy konsepsiyasini qilasiz — devorlar, derazalar, tom va 3D ko‘rinish. Spiker har bir bosishni ko‘rsatadi.",
+    "fear.a2":"Ochiq darsning <b>1 soatida</b> Revit’da uy konsepsiyasini qilasiz — devorlar, derazalar, tom va 3D ko‘rinish. Spiker har bir bosishni ko‘rsatadi.",
     "fear.q3":"«Arxitektorlikka o‘qish — universitetda 5–6 yil»",
     "fear.a3":"Xususiy uylar va interyer obyektlarini loyihalashni <b>6 oylik amaliyotda</b> o‘rgansa bo‘ladi. Birinchi tijorat buyurtmalari uchun diplom shart emas.",
 
     "ben.title":"1 soatlik ochiq darsda",
     "ben.kicker":"O‘zingiz bilan nima olib ketasiz",
-    "ben.b1t":"ArchiCAD’dagi birinchi loyiha",
+    "ben.b1t":"Revit’dagi birinchi loyiha",
     "ben.b1d":"Uy konsepsiyasi: reja, devorlar, derazalar, tom va 3D vizualizatsiya. Faylni portfolioga olasiz.",
     "ben.b2t":"Kasb ichkaridan",
     "ben.b2d":"O‘zbekistonda arxitektor nima bilan shug‘ullanadi: xususiy uylar, kafelar, turar-joy majmualari.",
@@ -269,23 +297,23 @@ const dict = {
     "prog.kicker":"Oqshom taymingi",
     "prog.title":"Ochiq dars dasturi","prog.mins":"· 60 daqiqa",
     "t1.t":"Tanishuv va 2026 bozori","t1.d":"Talab qayerda: xususiy uylar, HoReCa, turar-joy majmualari — va bunga qancha to‘lashadi.",
-    "t2.t":"ArchiCAD: o‘rnatish va interfeys","t2.d":"O‘z noutbukingizda yoki bizning kompyuterda ishlaysiz — joy bilan ta’minlaymiz.",
+    "t2.t":"Revit: o‘rnatish va interfeys","t2.d":"O‘z noutbukingizda yoki bizning kompyuterda ishlaysiz — joy bilan ta’minlaymiz.",
     "t3.t":"Uy konsepsiyasini noldan loyihalaymiz","t3.d":"Devorlar, derazalar, tom, 3D ko‘rinish — arxitektor rahbarligida. Faylni o‘zingiz bilan olasiz.",
     "t4.t":"Birinchi buyurtmaga qanday chiqish","t4.d":"Mijozlarni qayerdan topish, uy loyihasi va vizualizatsiya yangi boshlovchiga qancha turadi.",
     "t5.t":"Q&A — istalgan savolingizni berasiz","t5.d":"Shaxsan yoki Zoom orqali — onlayn format uchun.",
-    "prog.note":"📌 Noutbukingizni olib keling — ArchiCAD’ni birga o‘rnatamiz. Noutbuk bo‘lmasa — joyida kompyuter beramiz.",
+    "prog.note":"📌 Noutbukingizni olib keling — Revit’ni birga o‘rnatamiz. Noutbuk bo‘lmasa — joyida kompyuter beramiz.",
 
     "video.kicker":"Chizmadan — binogacha",
     "video.title":"Arxitektor ishi shunday ko‘rinadi",
     "video.lead":"Rejadagi birinchi chiziqdan fotorealistik vizualizatsiyagacha — bu yo‘lni kursda bosib o‘tasiz. Birinchi qadamni ochiq darsda qo‘yasiz.",
-    "video.chip":"ARCHICAD → 3D",
+    "video.chip":"REVIT → 3D",
 
     "m.kicker":"Ochiq dars spikeri",
     "m.name":"Timur Rahimov",
     "m.role":"Amaliyotchi arxitektor · INTERNO School «Arxitektura» kursining bosh mentori",
     "m.l1":"Turar-joy va jamoat binolarini loyihalashda 10+ yil",
     "m.l2":"Toshkent va Samarqandda 40+ amalga oshirilgan obyekt",
-    "m.l3":"ArchiCAD, AutoCAD va 3ds Max bo‘yicha ekspert",
+    "m.l3":"Revit, AutoCAD va 3ds Max bo‘yicha ekspert",
     "m.l4":"300+ talabaga loyihalashni noldan o‘rgatgan",
     "m.quote":"«Men sizga kurs sotmayman. Bir soat ichida o‘z qo‘lingiz bilan uy konsepsiyasini yig‘asiz va arxitektor qanday fikrlashini ko‘rasiz. Yoqsa — o‘qishga keling. Yo‘q — sizda birinchi loyiha va kasb haqida halol tushuncha qoladi.»",
     "m.cta":"Timurga yozilish",
@@ -356,7 +384,7 @@ const dict = {
     "cta.title":"Eng yaqin darsga joylar tugayapti",
     "cd.d":"kun","cd.h":"soat","cd.m":"daq","cd.s":"son",
     "prog.of":"/","prog.spots":"joy band",
-    "cta.b1":"✓ 1 soat ArchiCAD amaliyoti + Q&A","cta.b2":"✓ Sovg‘aga PDF qo‘llanma + chek-list","cta.b3":"✓ Asosiy kursga 20% chegirma",
+    "cta.b1":"✓ 1 soat Revit amaliyoti + Q&A","cta.b2":"✓ Sovg‘aga PDF qo‘llanma + chek-list","cta.b3":"✓ Asosiy kursga 20% chegirma",
     "form.name":"Ism","form.phone":"Telefon","form.city":"Shahar","form.lang":"Til",
     "form.opt1":"Rus tili","form.opt2":"O‘zbek tili",
     "form.consent":"Shaxsiy ma’lumotlarni qayta ishlashga roziman",
@@ -374,7 +402,7 @@ const dict = {
     "modal.eyebrow":"Bepul ochiq dars",
     "modal.title":"Eng yaqin darsga yoziling",
     "modal.lead":"Menejer 15 daqiqa ichida siz bilan bog‘lanadi — joy, sana va vaqtni tasdiqlaydi.",
-    "modal.b1":"✓ 1 soat ArchiCAD amaliyoti + Q&A",
+    "modal.b1":"✓ 1 soat Revit amaliyoti + Q&A",
     "modal.b2":"✓ Sovg‘aga PDF qo‘llanma + chek-list",
     "modal.b3":"✓ Asosiy kursga 20% chegirma",
   }
@@ -405,11 +433,11 @@ const cityNames = {
   var META = {
     ru: {
       title: 'Открытый урок по архитектуре · INTERNO School · Ташкент / Самарканд / Фергана',
-      desc: 'Бесплатный открытый урок INTERNO School. Спроектируйте концепцию своего первого дома в ArchiCAD за 1 час. Архитектор-практик · 10+ лет опыта.'
+      desc: 'Бесплатный открытый урок INTERNO School: быстрый старт в архитектуре, первый проект в Revit за 1 час и реальные цифры дохода в Узбекистане.'
     },
     uz: {
       title: 'Arxitektura bo‘yicha ochiq dars · INTERNO School · Toshkent / Samarqand / Farg‘ona',
-      desc: 'INTERNO School’ning bepul ochiq darsi. 1 soatda ArchiCAD’da birinchi uyingiz konsepsiyasini loyihalang. Amaliyotchi arxitektor · 10+ yil tajriba.'
+      desc: 'INTERNO School’ning bepul ochiq darsi: arxitekturada tez start, 1 soatda Revit’da birinchi loyiha va O‘zbekistondagi real daromad raqamlari.'
     }
   };
   document.title = META[lang].title;
@@ -563,12 +591,12 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
         <span><span data-i18n="hero.eyebrow">Бесплатный открытый урок · курс «Архитектура»</span> · <span class="city-name">Ташкент</span></span>
       </div>
       <h1 class="hero__title" id="heroTitle">
-        <span data-i18n="hero.title1">Спроектируйте своё</span><br/>
-        <span data-i18n="hero.title2">первое здание</span><br/>
-        <span data-i18n="hero.title3">за 1 вечер. <em>Бесплатно.</em></span>
+        <span data-i18n="hero.title1">Быстрый старт</span><br/>
+        <span data-i18n="hero.title2">в архитектуре.</span><br/>
+        <span data-i18n="hero.title3">Доход — через <em>6 месяцев.</em></span>
       </h1>
       <p class="hero__subtitle" data-i18n="hero.subtitle">
-        За 60 минут создадите концепцию собственного дома в ArchiCAD, узнаете сколько зарабатывают архитекторы в Узбекистане — и поймёте, ваша ли это профессия.
+        Бесплатный урок: за 1 час сделаете первый проект в Revit и узнаете, сколько платят архитекторам в Узбекистане в 2026.
       </p>
       <p class="hero__lesson lesson-next" data-lesson-line></p>
 
@@ -640,10 +668,75 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
 <!-- ===== TICKER ===== -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker__track">
-    <span>ArchiCAD <i>·</i></span><span>AutoCAD <i>·</i></span><span>3ds Max <i>·</i></span><span>Lumion <i>·</i></span><span>SketchUp <i>·</i></span><span data-i18n="ticker.t1">60 минут практики</span><span><i>·</i></span><span data-i18n="ticker.t2">Концепция дома с нуля</span><span><i>·</i></span><span data-i18n="ticker.t3">3 подарка каждому</span><span><i>·</i></span>
-    <span>ArchiCAD <i>·</i></span><span>AutoCAD <i>·</i></span><span>3ds Max <i>·</i></span><span>Lumion <i>·</i></span><span>SketchUp <i>·</i></span><span data-i18n="ticker.t1">60 минут практики</span><span><i>·</i></span><span data-i18n="ticker.t2">Концепция дома с нуля</span><span><i>·</i></span><span data-i18n="ticker.t3">3 подарка каждому</span><span><i>·</i></span>
+    <span>Revit <i>·</i></span><span>AutoCAD <i>·</i></span><span>3ds Max <i>·</i></span><span>Lumion <i>·</i></span><span>SketchUp <i>·</i></span><span data-i18n="ticker.t1">60 минут практики</span><span><i>·</i></span><span data-i18n="ticker.t2">Концепция дома с нуля</span><span><i>·</i></span><span data-i18n="ticker.t3">3 подарка каждому</span><span><i>·</i></span>
+    <span>Revit <i>·</i></span><span>AutoCAD <i>·</i></span><span>3ds Max <i>·</i></span><span>Lumion <i>·</i></span><span>SketchUp <i>·</i></span><span data-i18n="ticker.t1">60 минут практики</span><span><i>·</i></span><span data-i18n="ticker.t2">Концепция дома с нуля</span><span><i>·</i></span><span data-i18n="ticker.t3">3 подарка каждому</span><span><i>·</i></span>
   </div>
 </div>
+
+<!-- ===== DEMAND: востребованность и деньги ===== -->
+<section class="demand" id="demand">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-eyebrow" data-i18n="dem.kicker">Востребованность профессии</span>
+      <h2 class="display sm" data-i18n="dem.title">Узбекистан строится.<br/><span class="accent">Архитекторы нужны как никогда.</span></h2>
+      <p class="sec-sub" data-i18n="dem.lead">Строительный бум — один из главных драйверов экономики страны. Проектов больше, чем специалистов, которые умеют их делать.</p>
+    </div>
+    <div class="demand__grid">
+      <div class="demand-card demand-card--accent reveal">
+        <div class="demand-card__num" data-i18n="dem.c1n">Янги Тошкент</div>
+        <div class="demand-card__lbl" data-i18n="dem.c1">новый город на 2,5 млн жителей проектируется и строится прямо сейчас</div>
+      </div>
+      <div class="demand-card liquid-glass reveal reveal-d1">
+        <div class="demand-card__num" data-i18n="dem.c2n">×3</div>
+        <div class="demand-card__lbl" data-i18n="dem.c2">выросли объёмы строительства в Узбекистане за последние 10 лет</div>
+      </div>
+      <div class="demand-card liquid-glass reveal reveal-d2">
+        <div class="demand-card__num" data-i18n="dem.c3n">1000+</div>
+        <div class="demand-card__lbl" data-i18n="dem.c3">вакансий для архитекторов, проектировщиков и визуализаторов на hh.uz и OLX</div>
+      </div>
+      <div class="demand-card liquid-glass reveal reveal-d3">
+        <div class="demand-card__num" data-i18n="dem.c4n">Global</div>
+        <div class="demand-card__lbl" data-i18n="dem.c4">визуализаторы из Узбекистана берут заказы студий США и Европы на Upwork — доход в валюте</div>
+      </div>
+    </div>
+    <p class="demand__note reveal" data-i18n="dem.note">На открытом уроке разберём, какие ниши сейчас самые денежные — от частных домов до BIM-проектирования.</p>
+    <button type="button" class="btn btn--primary btn--lg btn--center" data-modal="signup"><span data-i18n="dem.cta">Занять место на уроке</span> <span class="arrow"></span></button>
+  </div>
+</section>
+
+<!-- ===== SALARY ===== -->
+<section class="salary">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-eyebrow" data-i18n="sal.kicker">Деньги в профессии</span>
+      <h2 class="display sm" data-i18n="sal.title">Сколько зарабатывает архитектор</h2>
+      <p class="sec-sub" data-i18n="sal.lead">Цифры — на основе вакансий hh.uz, Glassdoor и заказов Upwork (июль 2026).</p>
+    </div>
+
+    <div class="salary__grid">
+      <article class="salary__card liquid-glass reveal">
+        <div class="salary__lvl">Junior</div>
+        <div class="salary__period" data-i18n="sal.j">0–6 месяцев</div>
+        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$400–700</b></div>
+        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$700–1300</b></div>
+      </article>
+      <article class="salary__card salary__card--mid liquid-glass reveal reveal-d1">
+        <div class="salary__lvl">Middle</div>
+        <div class="salary__period" data-i18n="sal.m">6–18 месяцев</div>
+        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$900–1600</b></div>
+        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$1800–3000</b></div>
+      </article>
+      <article class="salary__card salary__card--sr reveal reveal-d2">
+        <div class="salary__lvl">Senior</div>
+        <div class="salary__period" data-i18n="sal.s">1.5+ лет</div>
+        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$1800–3500+</b></div>
+        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$3500–7000+</b></div>
+      </article>
+    </div>
+    <p class="salary__note reveal" data-i18n="sal.note">Визуализаторы и BIM-специалисты на удалёнке зарабатывают в валюте — рынок глобальный.</p>
+    <a href="#cta" class="btn btn--primary btn--lg btn--center"><span data-i18n="sal.cta">Хочу так же — записаться</span> <span class="arrow"></span></a>
+  </div>
+</section>
 
 <!-- ===== FEARS / MYTHS ===== -->
 <section class="fear" id="fit">
@@ -677,7 +770,7 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
         </div>
         <div class="fear__good">
           <span class="fear__check" aria-hidden="true">✓</span>
-          <span data-i18n="fear.a2">За <b>1 час</b> открытого урока вы сделаете концепцию дома в ArchiCAD — стены, окна, крыша и 3D-вид. Спикер покажет каждый клик.</span>
+          <span data-i18n="fear.a2">За <b>1 час</b> открытого урока вы сделаете концепцию дома в Revit — стены, окна, крыша и 3D-вид. Спикер покажет каждый клик.</span>
         </div>
       </article>
 
@@ -708,7 +801,7 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
       <article class="bento__card bento__card--lg liquid-glass reveal">
         <img class="bento__icon bento__icon--lg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093923_2cec07d4-57b9-47d6-9aa8-2a740a1ca42c_min.png" alt="" loading="lazy" decoding="async" />
         <span class="bento__num">01</span>
-        <h3 class="bento__title" data-i18n="ben.b1t">Первый проект в ArchiCAD</h3>
+        <h3 class="bento__title" data-i18n="ben.b1t">Первый проект в Revit</h3>
         <p class="bento__desc" data-i18n="ben.b1d">Концепция дома: план, стены, окна, крыша и 3D-визуализация. Файл заберёте в портфолио.</p>
       </article>
       <article class="bento__card liquid-glass reveal reveal-d1">
@@ -779,13 +872,13 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
 
     <ol class="timeline liquid-glass reveal">
       <li><span class="timeline__time">0–10</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t1.t">Знакомство и рынок 2026</b><p data-i18n="t1.d">Куда идёт спрос: частные дома, HoReCa, жилые комплексы — и сколько за это платят.</p></div></li>
-      <li><span class="timeline__time">10–25</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t2.t">ArchiCAD: установка и интерфейс</b><p data-i18n="t2.d">Работаете на своём ноутбуке или нашем — мы обеспечим место.</p></div></li>
+      <li><span class="timeline__time">10–25</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t2.t">Revit: установка и интерфейс</b><p data-i18n="t2.d">Работаете на своём ноутбуке или нашем — мы обеспечим место.</p></div></li>
       <li><span class="timeline__time">25–50</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t3.t">Проектируем концепцию дома с нуля</b><p data-i18n="t3.d">Стены, окна, крыша, 3D-вид — под руководством архитектора. Файл унесёте с собой.</p></div></li>
       <li><span class="timeline__time">50–55</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t4.t">Как выйти на первый заказ</b><p data-i18n="t4.d">Где искать клиентов, сколько стоит проект дома и визуализация для новичка.</p></div></li>
       <li><span class="timeline__time">55–60</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t5.t">Q&amp;A — задаёте любые вопросы</b><p data-i18n="t5.d">Лично или через Zoom — для онлайн-формата.</p></div></li>
     </ol>
 
-    <p class="program__note liquid-glass reveal" data-i18n="prog.note">📌 Возьмите ноутбук — ArchiCAD установим вместе. Если ноутбука нет — обеспечим компьютер на месте.</p>
+    <p class="program__note liquid-glass reveal" data-i18n="prog.note">📌 Возьмите ноутбук — Revit установим вместе. Если ноутбука нет — обеспечим компьютер на месте.</p>
   </div>
 </section>
 
@@ -798,7 +891,7 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
       <p class="sec-sub" data-i18n="video.lead">От первой линии на плане до фотореалистичной визуализации — весь путь вы пройдёте на курсе. Первый шаг сделаете уже на открытом уроке.</p>
     </div>
     <figure class="showreel__frame liquid-glass reveal" id="showreelFrame">
-      <span class="showreel__chip" data-i18n="video.chip">ARCHICAD → 3D</span>
+      <span class="showreel__chip" data-i18n="video.chip">REVIT → 3D</span>
       <video class="showreel__video" id="showreelVideo"
         src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_094046_c4bf332f-10e6-4f9a-9c4c-927b9b03afca.mp4"
         poster="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093319_a188b5d9-b4cf-4c1e-bd6f-57374f48c514.png"
@@ -820,7 +913,7 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
       <ul class="mentor__list">
         <li data-i18n="m.l1">10+ лет проектирования жилых и общественных зданий</li>
         <li data-i18n="m.l2">40+ реализованных объектов в Ташкенте и Самарканде</li>
-        <li data-i18n="m.l3">Эксперт по ArchiCAD, AutoCAD и 3ds Max</li>
+        <li data-i18n="m.l3">Эксперт по Revit, AutoCAD и 3ds Max</li>
         <li data-i18n="m.l4">Обучил 300+ студентов проектированию с нуля</li>
       </ul>
       <blockquote class="mentor__quote" data-i18n="m.quote">
@@ -889,40 +982,6 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
       </button>
       <p class="model3d__hint" data-i18n="model.hint">Вращайте · приближайте колёсиком</p>
     </div>
-  </div>
-</section>
-
-<!-- ===== SALARY ===== -->
-<section class="salary">
-  <div class="container">
-    <div class="reveal">
-      <span class="sec-eyebrow" data-i18n="sal.kicker">Деньги в профессии</span>
-      <h2 class="display sm" data-i18n="sal.title">Сколько зарабатывает архитектор</h2>
-      <p class="sec-sub" data-i18n="sal.lead">Цифры — на основе вакансий hh.uz, Glassdoor и заказов Upwork (июль 2026).</p>
-    </div>
-
-    <div class="salary__grid">
-      <article class="salary__card liquid-glass reveal">
-        <div class="salary__lvl">Junior</div>
-        <div class="salary__period" data-i18n="sal.j">0–6 месяцев</div>
-        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$400–700</b></div>
-        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$700–1300</b></div>
-      </article>
-      <article class="salary__card salary__card--mid liquid-glass reveal reveal-d1">
-        <div class="salary__lvl">Middle</div>
-        <div class="salary__period" data-i18n="sal.m">6–18 месяцев</div>
-        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$900–1600</b></div>
-        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$1800–3000</b></div>
-      </article>
-      <article class="salary__card salary__card--sr reveal reveal-d2">
-        <div class="salary__lvl">Senior</div>
-        <div class="salary__period" data-i18n="sal.s">1.5+ лет</div>
-        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$1800–3500+</b></div>
-        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$3500–7000+</b></div>
-      </article>
-    </div>
-    <p class="salary__note reveal" data-i18n="sal.note">Визуализаторы и BIM-специалисты на удалёнке зарабатывают в валюте — рынок глобальный.</p>
-    <a href="#cta" class="btn btn--primary btn--lg btn--center"><span data-i18n="sal.cta">Хочу так же — записаться</span> <span class="arrow"></span></a>
   </div>
 </section>
 
@@ -1090,7 +1149,7 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
         </div>
 
         <ul class="cta__bullets">
-          <li data-i18n="cta.b1">✓ 1 час практики в ArchiCAD + Q&A</li>
+          <li data-i18n="cta.b1">✓ 1 час практики в Revit + Q&A</li>
           <li data-i18n="cta.b2">✓ PDF-гайд + чек-лист в подарок</li>
           <li data-i18n="cta.b3">✓ Скидка 20% на основной курс</li>
         </ul>
@@ -1187,7 +1246,7 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
     </div>
 
     <ul class="modal__bullets">
-      <li data-i18n="modal.b1">✓ 1 час практики в ArchiCAD + Q&A</li>
+      <li data-i18n="modal.b1">✓ 1 час практики в Revit + Q&A</li>
       <li data-i18n="modal.b2">✓ PDF-гайд + чек-лист в подарок</li>
       <li data-i18n="modal.b3">✓ Скидка 20% на основной курс</li>
     </ul>
