@@ -605,7 +605,8 @@ section{position:relative}
 .works{padding:96px 0 72px}
 .works__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px 0 8px}
 .work{
-  position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;
+  /* Страницы портфолио спикера квадратные (1:1) — показываем без обрезки */
+  position:relative;aspect-ratio:1/1;border-radius:18px;overflow:hidden;
   background:var(--panel2);
 }
 .work img{
