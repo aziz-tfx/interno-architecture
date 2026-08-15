@@ -37,6 +37,8 @@ declare -A FILES=(
   # motion / 3d
   [showreel.mp4]="hf_20260815_094046_c4bf332f-10e6-4f9a-9c4c-927b9b03afca.mp4"
   [house-model.glb]="hf_20260815_094011_9fd65654-8da9-4bac-9e86-6ce8c5df5721.glb"
+  [tashkent-poster.png]="hf_20260815_131059_afa4c629-6dd5-4c4b-88ac-04cccb7145c5.png"
+  [tashkent-timelapse.mp4]="hf_20260815_131138_fe9267a8-c166-41e9-814e-07fa94543f32.mp4"
 )
 
 for name in "${!FILES[@]}"; do

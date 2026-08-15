@@ -73,6 +73,7 @@ const dict = {
     "dem.kicker":"Востребованность профессии",
     "dem.title":"Узбекистан строится.<br/><span class=\"accent\">Архитекторы нужны как никогда.</span>",
     "dem.lead":"Строительный бум — один из главных драйверов экономики страны. Проектов больше, чем специалистов, которые умеют их делать.",
+    "dem.chip":"ТАШКЕНТ · 2026",
     "dem.c1n":"Янги Тошкент",
     "dem.c1":"новый город на 2,5 млн жителей проектируется и строится прямо сейчас",
     "dem.c2n":"×3",
@@ -248,6 +249,7 @@ const dict = {
     "dem.kicker":"Kasbning talabgirligi",
     "dem.title":"O‘zbekiston qurilmoqda.<br/><span class=\"accent\">Arxitektorlar har qachongidan ham kerak.</span>",
     "dem.lead":"Qurilish bumi — mamlakat iqtisodiyotining asosiy drayverlaridan biri. Loyihalar ularni qila oladigan mutaxassislardan ko‘p.",
+    "dem.chip":"TOSHKENT · 2026",
     "dem.c1n":"Yangi Toshkent",
     "dem.c1":"2,5 mln aholiga mo‘ljallangan yangi shahar hozir loyihalanmoqda va qurilmoqda",
     "dem.c2n":"×3",
@@ -681,22 +683,33 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
       <h2 class="display sm" data-i18n="dem.title">Узбекистан строится.<br/><span class="accent">Архитекторы нужны как никогда.</span></h2>
       <p class="sec-sub" data-i18n="dem.lead">Строительный бум — один из главных драйверов экономики страны. Проектов больше, чем специалистов, которые умеют их делать.</p>
     </div>
-    <div class="demand__grid">
-      <div class="demand-card demand-card--accent reveal">
-        <div class="demand-card__num" data-i18n="dem.c1n">Янги Тошкент</div>
-        <div class="demand-card__lbl" data-i18n="dem.c1">новый город на 2,5 млн жителей проектируется и строится прямо сейчас</div>
-      </div>
-      <div class="demand-card liquid-glass reveal reveal-d1">
-        <div class="demand-card__num" data-i18n="dem.c2n">×3</div>
-        <div class="demand-card__lbl" data-i18n="dem.c2">выросли объёмы строительства в Узбекистане за последние 10 лет</div>
-      </div>
-      <div class="demand-card liquid-glass reveal reveal-d2">
-        <div class="demand-card__num" data-i18n="dem.c3n">1000+</div>
-        <div class="demand-card__lbl" data-i18n="dem.c3">вакансий для архитекторов, проектировщиков и визуализаторов на hh.uz и OLX</div>
-      </div>
-      <div class="demand-card liquid-glass reveal reveal-d3">
-        <div class="demand-card__num" data-i18n="dem.c4n">Global</div>
-        <div class="demand-card__lbl" data-i18n="dem.c4">визуализаторы из Узбекистана берут заказы студий США и Европы на Upwork — доход в валюте</div>
+    <div class="demand__layout">
+      <!-- Живой таймлапс строящегося Ташкента (сгенерирован в Higgsfield):
+           краны, стройка на закате. Ставится на паузу вне вьюпорта. -->
+      <figure class="demand-media reveal">
+        <video data-inview-video
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_131138_fe9267a8-c166-41e9-814e-07fa94543f32.mp4"
+          poster="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_131059_afa4c629-6dd5-4c4b-88ac-04cccb7145c5.png"
+          muted loop playsinline preload="none" autoplay aria-hidden="true"></video>
+        <span class="demand-media__chip" data-i18n="dem.chip">ТАШКЕНТ · 2026</span>
+        <figcaption class="demand-media__overlay">
+          <div class="demand-media__stat" data-i18n="dem.c1n">Янги Тошкент</div>
+          <p class="demand-media__lbl" data-i18n="dem.c1">новый город на 2,5 млн жителей проектируется и строится прямо сейчас</p>
+        </figcaption>
+      </figure>
+      <div class="demand__stats">
+        <div class="demand-card liquid-glass reveal reveal-d1">
+          <div class="demand-card__num" data-i18n="dem.c2n">×3</div>
+          <div class="demand-card__lbl" data-i18n="dem.c2">выросли объёмы строительства в Узбекистане за последние 10 лет</div>
+        </div>
+        <div class="demand-card liquid-glass reveal reveal-d2">
+          <div class="demand-card__num" data-i18n="dem.c3n">1000+</div>
+          <div class="demand-card__lbl" data-i18n="dem.c3">вакансий для архитекторов, проектировщиков и визуализаторов на hh.uz и OLX</div>
+        </div>
+        <div class="demand-card liquid-glass reveal reveal-d3">
+          <div class="demand-card__num" data-i18n="dem.c4n">Global</div>
+          <div class="demand-card__lbl" data-i18n="dem.c4">визуализаторы из Узбекистана берут заказы студий США и Европы на Upwork — доход в валюте</div>
+        </div>
       </div>
     </div>
     <p class="demand__note reveal" data-i18n="dem.note">На открытом уроке разберём, какие ниши сейчас самые денежные — от частных домов до BIM-проектирования.</p>

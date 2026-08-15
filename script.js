@@ -541,24 +541,19 @@ if(heroVisual && window.matchMedia('(hover:hover) and (min-width:980px)').matche
   update();
 })();
 
-// ===== SHOWREEL: не проигрывать видео вне вьюпорта =====
+// ===== AUTOPLAY-ВИДЕО: играют только во вьюпорте =====
+// Все фоновые ролики (шоурил, таймлапс Ташкента) помечены data-inview-video —
+// ставим на паузу вне экрана, экономим батарею и трафик.
 (function(){
-  const video = document.getElementById('showreelVideo');
-  if(!video) return;
-  const src = video.getAttribute('src') || '';
-  if(src.indexOf('http') !== 0 && src.indexOf('assets/') !== 0){
-    // Видео ещё не привязано — убираем секцию.
-    video.closest('.showreel')?.remove();
-    return;
-  }
-  if(!('IntersectionObserver' in window)) return;
+  const videos = document.querySelectorAll('#showreelVideo,video[data-inview-video]');
+  if(!videos.length || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver(entries=>{
     entries.forEach(en=>{
-      if(en.isIntersecting) video.play().catch(()=>{});
-      else video.pause();
+      if(en.isIntersecting) en.target.play().catch(()=>{});
+      else en.target.pause();
     });
   },{threshold:.25});
-  io.observe(video);
+  videos.forEach(v=>io.observe(v));
 })();
 
 // ===== META PIXEL: ViewContent on key sections (fires once per section) =====
