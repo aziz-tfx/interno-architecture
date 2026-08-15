@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Вы записаны! · INTERNO School</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/svg+xml" href="logo-ru.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:#F76B2B;--orange-light:#FF8B4D;--bg:#0B0B0D;--ink:#0E0E0E;
+  --paper:#fff;--muted:#9a9a9a;--line:rgba(255,255,255,.08);
+}
+body{
+  font-family:'Inter',sans-serif;background:var(--bg);color:var(--paper);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:20px;-webkit-font-smoothing:antialiased;
+  background-image:
+    linear-gradient(rgba(247,107,43,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247,107,43,.05) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+.card{
+  max-width:520px;width:100%;text-align:center;
+  background:rgba(255,255,255,.04);border-radius:28px;padding:48px 36px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.1),0 30px 80px rgba(0,0,0,.5);
+}
+.check{
+  width:84px;height:84px;border-radius:50%;margin:0 auto 24px;
+  background:var(--orange);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-size:40px;font-weight:800;
+  box-shadow:0 0 60px rgba(247,107,43,.45);
+  animation:pop .5s cubic-bezier(.22,1.2,.36,1) backwards;
+}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(24px,5vw,34px);letter-spacing:-.02em;margin-bottom:14px}
+h1 em{font-style:normal;color:var(--orange)}
+p{color:#bbb;font-size:15px;line-height:1.6;margin-bottom:10px}
+.steps{
+  text-align:left;background:rgba(255,255,255,.05);border-radius:16px;
+  padding:20px 22px;margin:24px 0;font-size:14px;color:#ddd;
+  display:flex;flex-direction:column;gap:10px;
+}
+.steps b{color:var(--orange)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--orange);color:var(--ink);font-weight:700;font-size:15px;
+  padding:16px 28px;border-radius:999px;text-decoration:none;transition:.2s;
+}
+.btn:hover{background:var(--orange-light);transform:translateY(-1px)}
+.back{display:block;margin-top:16px;font-size:13px;color:#888;text-decoration:none}
+.back:hover{color:var(--paper)}
+[lang-uz]{display:none}
+html[lang="uz"] [lang-ru]{display:none}
+html[lang="uz"] [lang-uz]{display:block}
+html[lang="uz"] span[lang-uz],html[lang="uz"] em[lang-uz]{display:inline}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+// Advanced matching из данных лида, сохранённых на лендинге перед редиректом.
+var am = { country: 'uz' };
+try {
+  var ph = sessionStorage.getItem('interno_last_lead_ph');
+  var fn = sessionStorage.getItem('interno_last_lead_fn');
+  if(ph) am.ph = ph;
+  if(fn) am.fn = fn;
+} catch(_) {}
+fbq('init', '4251277901808457', am);
+fbq('track', 'PageView');
+// CompleteRegistration с тем же eventID, что и Lead (дедупликация на стороне Meta).
+try {
+  var eid = sessionStorage.getItem('interno_last_lead_eid');
+  fbq('track', 'CompleteRegistration',
+    { content_name: 'open_lesson_architecture', currency: 'USD', value: 1 },
+    eid ? { eventID: eid + '_reg' } : undefined);
+} catch(_) {
+  fbq('track', 'CompleteRegistration', { content_name: 'open_lesson_architecture' });
+}
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
+/></noscript>
+<script>
+// Язык: тот же ключ localStorage, что и на лендинге.
+try {
+  var l = localStorage.getItem('interno_lang');
+  if(l === 'uz') document.documentElement.lang = 'uz';
+} catch(_) {}
+</script>
+</head>
+<body>
+<div class="card">
+  <div class="check">✓</div>
+  <div lang-ru>
+    <h1>Вы записаны на <em>открытый урок!</em></h1>
+    <p>Менеджер свяжется с вами в течение 15 минут, чтобы подтвердить место, дату и время.</p>
+    <div class="steps">
+      <div><b>1.</b> Ответьте на звонок с кодом +998 78 — подтвердим бронь.</div>
+      <div><b>2.</b> Подарки придут на WhatsApp в течение 5 минут.</div>
+      <div><b>3.</b> Возьмите ноутбук на урок — ArchiCAD установим вместе.</div>
+    </div>
+    <a class="btn" href="https://t.me/internoschool" target="_blank" rel="noopener">Подписаться на Telegram школы</a>
+    <a class="back" href="index.html">← Вернуться на страницу урока</a>
+  </div>
+  <div lang-uz>
+    <h1><em>Ochiq darsga</em> yozildingiz!</h1>
+    <p>Menejer 15 daqiqa ichida siz bilan bog‘lanadi — joy, sana va vaqtni tasdiqlaydi.</p>
+    <div class="steps">
+      <div><b>1.</b> +998 78 kodli qo‘ng‘iroqqa javob bering — bronni tasdiqlaymiz.</div>
+      <div><b>2.</b> Sovg‘alar 5 daqiqa ichida WhatsApp’ga keladi.</div>
+      <div><b>3.</b> Darsga noutbuk olib keling — ArchiCAD’ni birga o‘rnatamiz.</div>
+    </div>
+    <a class="btn" href="https://t.me/internoschool" target="_blank" rel="noopener">Maktab Telegram’iga obuna bo‘lish</a>
+    <a class="back" href="index.html">← Dars sahifasiga qaytish</a>
+  </div>
+</div>
+</body>
+</html>

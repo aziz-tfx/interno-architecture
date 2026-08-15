@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Открытый урок по архитектуре · INTERNO School · Ташкент / Самарканд / Фергана</title>
+<meta name="description" content="Бесплатный открытый урок INTERNO School. Спроектируйте концепцию своего первого дома в ArchiCAD за 1 час. Архитектор-практик · 10+ лет опыта." />
+<link rel="canonical" href="https://architecture.interno.school/" />
+<link rel="icon" type="image/svg+xml" href="logo-ru.svg" />
+<meta property="og:title" content="Открытый урок по архитектуре — INTERNO School" />
+<meta property="og:description" content="За 1 час — концепция вашего первого здания в ArchiCAD + 3 подарка." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://architecture.interno.school/" />
+<meta property="og:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093319_a188b5d9-b4cf-4c1e-bd6f-57374f48c514.png" />
+<meta property="og:image:width" content="1024" />
+<meta property="og:image:height" content="1024" />
+<meta property="og:locale" content="ru_RU" />
+<meta property="og:locale:alternate" content="uz_UZ" />
+<meta property="og:site_name" content="INTERNO School" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Открытый урок по архитектуре — INTERNO School" />
+<meta name="twitter:description" content="За 1 час — концепция вашего первого здания в ArchiCAD + 3 подарка." />
+<meta name="twitter:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093319_a188b5d9-b4cf-4c1e-bd6f-57374f48c514.png" />
+
+<!-- ===== BOOT + I18N =====
+     Inlined in <head> so ?lang=uz|ru and ?city=tsh|smr|fer apply synchronously,
+     before the hero is painted (no flash of Russian text on ?lang=uz).
+     Order: URL param → localStorage → navigator.language → default uz. -->
+<script>
+// Next open lesson — single source of truth for hero line, forms and countdown.
+// Lessons repeat weekly: the anchor date fixes the weekday and time (Tashkent,
+// UTC+5), the upcoming date is computed from it so the page never goes stale.
+// seatsMax/seatsMin: свободные места в начале и в конце недельного цикла —
+// seatsLeft считается от времени до урока, одинаково у всех посетителей.
+window.LESSON_SCHEDULE = { anchor: '2026-08-21', time: '19:00', seatsTotal: 20, seatsMax: 11, seatsMin: 2 };
+window.nextLessonTarget = function(){
+  var S = window.LESSON_SCHEDULE, WEEK = 7 * 86400000;
+  var t = new Date(S.anchor + 'T' + S.time + ':00+05:00');
+  var now = new Date();
+  if(now > t) t = new Date(t.getTime() + Math.ceil((now - t) / WEEK) * WEEK);
+  return t;
+};
+window.lessonDateStr = function(target){
+  // Calendar date of the lesson in Tashkent: shift to UTC+5, read as UTC.
+  return new Date(target.getTime() + 5 * 3600000).toISOString().slice(0, 10);
+};
+window.lessonSeatsLeft = function(target){
+  var S = window.LESSON_SCHEDULE, WEEK = 7 * 86400000;
+  var f = Math.min(1, Math.max(0, 1 - (target - new Date()) / WEEK));
+  var eased = f * f * (3 - 2 * f);
+  return S.seatsMin + Math.round((S.seatsMax - S.seatsMin) * (1 - eased));
+};
+window.NEXT_LESSON = (function(){
+  var S = window.LESSON_SCHEDULE, t = nextLessonTarget();
+  return { date: lessonDateStr(t), time: S.time, seatsLeft: lessonSeatsLeft(t), seatsTotal: S.seatsTotal };
+})();
+
+const dict = {
+  ru: {
+    "nav.fit":"Подойдёт?","nav.program":"Программа","nav.mentor":"Спикер","nav.works":"Работы","nav.faq":"FAQ","nav.signup":"Записаться",
+    "nav.cityAria":"Город",
+    "hero.eyebrow":"Бесплатный открытый урок · курс «Архитектура»",
+    "hero.title1":"Спроектируйте своё","hero.title2":"первое здание","hero.title3":"за 1 вечер. <em>Бесплатно.</em>",
+    "hero.subtitle":"За 60 минут создадите концепцию собственного дома в ArchiCAD, узнаете сколько зарабатывают архитекторы в Узбекистане — и поймёте, ваша ли это профессия.",
+    "hero.cta":"Записаться бесплатно","hero.cta2":"Программа урока",
+    "hero.social":"2400+ выпускников школы · 8 лет · менторы-практики",
+    "hero.micro":"🔒 Без спама. Дату и время согласуем при подтверждении.",
+    "hero.alt":"3D-макет современного дома",
+    "hero.hint":"3D-сцена · наведите курсор",
+    "trust.t1":"8 лет на рынке","trust.t2":"2400+ выпускников","trust.t3":"Архитектор-практик","trust.t4":"3 города Узбекистана",
+    "ticker.t1":"60 минут практики","ticker.t2":"Концепция дома с нуля","ticker.t3":"3 подарка каждому",
+
+    "fear.kicker":"3 мифа, которые останавливают 90% людей",
+    "fear.title":"«Архитектура — это не для меня».",
+    "fear.title2":"Разберём все 3 мифа за один вечер.",
+    "fear.q1":"«Я не умею рисовать»",
+    "fear.a1":"Современный архитектор проектирует в программах. <b>Логика, пространство и насмотренность</b> важнее академического рисунка — а их мы развиваем на курсе.",
+    "fear.q2":"«Черчение и программы — это сложно»",
+    "fear.a2":"За <b>1 час</b> открытого урока вы сделаете концепцию дома в ArchiCAD — стены, окна, крыша и 3D-вид. Спикер покажет каждый клик.",
+    "fear.q3":"«Учиться на архитектора — 5–6 лет в вузе»",
+    "fear.a3":"Проектировать частные дома и интерьерные объекты можно научиться за <b>6 месяцев практики</b>. Диплом вуза не нужен, чтобы брать первые коммерческие заказы.",
+
+    "ben.title":"За 1 час на открытом уроке",
+    "ben.kicker":"Что вы унесёте с собой",
+    "ben.b1t":"Первый проект в ArchiCAD",
+    "ben.b1d":"Концепция дома: план, стены, окна, крыша и 3D-визуализация. Файл заберёте в портфолио.",
+    "ben.b2t":"Профессия изнутри",
+    "ben.b2d":"Чем занимается архитектор в Узбекистане: частные дома, кафе, жилые комплексы.",
+    "ben.b3t":"Реальные цифры зарплат",
+    "ben.b3d":"Сколько платят архитекторам и визуализаторам в 2026 — по данным hh.uz и Upwork.",
+    "ben.b4t":"План на 6 месяцев",
+    "ben.b4d":"Пошаговый маршрут: от нуля до первого коммерческого заказа.",
+    "ben.b5t":"Ответы на ваши вопросы",
+    "ben.b5d":"Q&A со спикером — лично или в Zoom для онлайн-формата.",
+    "ben.foot":"И ВСЕ присутствующие получают 3 подарка ↓",
+
+    "gift.title":"Подарки за регистрацию",
+    "gift.l1":"ПОДАРОК 1","gift.l2":"ПОДАРОК 2","gift.l3":"ПОДАРОК 3",
+    "gift.t1":"PDF-гайд «Профессия архитектора в Узбекистане 2026»",
+    "gift.d1":"36 страниц: рынок, софт, цены на проекты, с чего начать.",
+    "gift.t2":"Чек-лист «Первые 5 заказов на проекты и визуализации»",
+    "gift.d2":"12 шагов: от портфолио в Instagram до подписанного договора.",
+    "gift.t3":"Промокод на скидку 20% на основной курс",
+    "gift.d3":"Действует 7 дней после открытого урока.",
+    "gift.note":"Все подарки придут на WhatsApp в течение 5 минут после регистрации.",
+    "gift.cta":"Получить подарки и записаться",
+
+    "prog.kicker":"Тайминг вечера",
+    "prog.title":"Программа открытого урока","prog.mins":"· 60 мин",
+    "t1.t":"Знакомство и рынок 2026","t1.d":"Куда идёт спрос: частные дома, HoReCa, жилые комплексы — и сколько за это платят.",
+    "t2.t":"ArchiCAD: установка и интерфейс","t2.d":"Работаете на своём ноутбуке или нашем — мы обеспечим место.",
+    "t3.t":"Проектируем концепцию дома с нуля","t3.d":"Стены, окна, крыша, 3D-вид — под руководством архитектора. Файл унесёте с собой.",
+    "t4.t":"Как выйти на первый заказ","t4.d":"Где искать клиентов, сколько стоит проект дома и визуализация для новичка.",
+    "t5.t":"Q&A — задаёте любые вопросы","t5.d":"Лично или через Zoom — для онлайн-формата.",
+    "prog.note":"📌 Возьмите ноутбук — ArchiCAD установим вместе. Если ноутбука нет — обеспечим компьютер на месте.",
+
+    "video.kicker":"Из чертежа — в здание",
+    "video.title":"Так выглядит работа архитектора",
+    "video.lead":"От первой линии на плане до фотореалистичной визуализации — весь путь вы пройдёте на курсе. Первый шаг сделаете уже на открытом уроке.",
+    "video.chip":"ARCHICAD → 3D",
+
+    "m.kicker":"Спикер открытого урока",
+    "m.name":"Тимур Рахимов",
+    "m.role":"Архитектор-практик · ведущий ментор курса «Архитектура» в INTERNO School",
+    "m.l1":"10+ лет проектирования жилых и общественных зданий",
+    "m.l2":"40+ реализованных объектов в Ташкенте и Самарканде",
+    "m.l3":"Эксперт по ArchiCAD, AutoCAD и 3ds Max",
+    "m.l4":"Обучил 300+ студентов проектированию с нуля",
+    "m.quote":"«Я не буду продавать вам курс. За час вы своими руками соберёте концепцию дома и увидите, как думает архитектор. Зацепит — приходите учиться. Нет — у вас останется первый проект и честное понимание профессии.»",
+    "m.cta":"Записаться к Тимуру",
+
+    "works.kicker":"Портфолио студентов",
+    "works.title":"Работы студентов курса",
+    "works.lead":"Концепции и визуализации, сделанные студентами к 4-му месяцу обучения.",
+    "works.cta":"Хочу так же — записаться",
+    "works.c1":"Частный дом · Ташкент",
+    "works.c2":"Двор жилого комплекса · Самарканд",
+    "works.c3":"Кофейня · Ташкент",
+    "works.c4":"Вилла с бассейном · Чарвак",
+    "works.c5":"Офисное здание · Ташкент",
+    "works.c6":"Махаллинский центр · Фергана",
+    "works.badge":"4-й месяц обучения",
+
+    "model.kicker":"Интерактив",
+    "model.title":"Покрутите проект студента в 3D",
+    "model.lead":"Концепция дома, собранная на курсе, — прямо в вашем браузере. Тяните курсором, чтобы осмотреть со всех сторон.",
+    "model.load":"Загрузить 3D-модель",
+    "model.hint":"Вращайте · приближайте колёсиком",
+
+    "sal.kicker":"Деньги в профессии",
+    "sal.title":"Сколько зарабатывает архитектор",
+    "sal.lead":"Цифры — на основе вакансий hh.uz, Glassdoor и заказов Upwork (июль 2026).",
+    "sal.j":"0–6 месяцев","sal.m":"6–18 месяцев","sal.s":"1.5+ лет",
+    "sal.uz":"В Узбекистане","sal.rem":"Удалёнка / зарубеж",
+    "sal.note":"Визуализаторы и BIM-специалисты на удалёнке зарабатывают в валюте — рынок глобальный.",
+    "sal.cta":"Хочу так же — записаться",
+
+    "quiz.title":"Подходит ли вам архитектура?",
+    "quiz.lead":"5 коротких вопросов · 30 секунд · персональный вердикт от ментора",
+    "quiz.restart":"← Пройти заново",
+    "q1.t":"Замечаете ли вы архитектуру вокруг — красивые фасады, необычные дома, детали зданий?",
+    "q1.a1":"Да, постоянно","q1.a2":"Иногда","q1.a3":"Не обращаю внимания",
+    "q2.t":"Что вас больше привлекает в профессии?",
+    "q2.a1":"Создавать то, что построят","q2.a2":"Стабильный доход","q2.a3":"Работа удалённо","q2.a4":"Всё вместе",
+    "q3.t":"Сколько времени готовы уделять обучению?",
+    "q3.a1":"1–2 часа в день","q3.a2":"3–4 часа в день","q3.a3":"Только по выходным",
+    "q4.t":"Какой результат хотите получить через 6 месяцев?",
+    "q4.a1":"Первый заказ и доход","q4.a2":"Новая профессия и портфолио","q4.a3":"Просто разобраться, моё ли это",
+    "q5.t":"В каком городе вы находитесь?",
+    "q5.a1":"Ташкент","q5.a2":"Самарканд","q5.a3":"Фергана","q5.a4":"Другой город",
+    "verdict.high":"<b>Отличный результат:</b> по вашим ответам профессия архитектора подходит вам — приходите на бесплатный урок и проверьте на практике.",
+    "verdict.mid":"<b>Хороший потенциал:</b> у вас есть интерес и мотивация — открытый урок поможет окончательно понять, ваше ли это.",
+    "verdict.low":"<b>Вы пока сомневаетесь</b> — бесплатный урок ни к чему не обязывает и поможет принять решение.",
+
+    "why.title":"Почему именно INTERNO",
+    "why.l1":"лет на рынке · с 2018 года",
+    "why.l2":"выпускников — крупнейшая школа дизайна в Узбекистане",
+    "why.l3":"выпускников работают в профессии — проверяем по соцсетям",
+    "why.l4":"города — Ташкент, Самарканд, Фергана",
+
+    "faq.title":"Частые вопросы",
+    "faq.q1":"Урок реально бесплатный? Будете продавать курс?",
+    "faq.a1":"Да, бесплатно. Продавать никто не будет — но если зацепит, расскажем как поступить на основной курс.",
+    "faq.q2":"Я никогда не чертил и не проектировал. Справлюсь?",
+    "faq.a2":"Урок построен с нуля. Спикер показывает каждый шаг — вы просто повторяете и задаёте вопросы.",
+    "faq.q3":"Нужен ли мощный ноутбук?",
+    "faq.a3":"Для урока хватит любого ноутбука последних лет. Если ноутбука нет — обеспечим компьютер на месте.",
+    "faq.q4":"Я живу в Самарканде/Фергане. Как мне попасть?",
+    "faq.a4":"Открытые уроки проводятся во всех 3 городах. Адрес в вашем городе пришлём при записи.",
+    "faq.q5":"Сколько длится основной курс?","faq.a5":"6 месяцев. 2 раза в неделю по 2 часа. Плюс практика на реальных объектах.",
+    "faq.q6":"Дадите ли диплом?","faq.a6":"Да, выдаём сертификат с QR-кодом, который проверяется на нашем сайте.",
+    "faq.q7":"Что если я запишусь и не приду?","faq.a7":"Просто напишите нам — перенесём на следующий урок. Без проблем.",
+    "faq.q8":"Чем архитектура отличается от дизайна интерьера?","faq.a8":"Архитектор проектирует само здание: планировки, фасады, конструкции. Дизайнер работает с пространством внутри. На уроке разберём обе профессии — поймёте, что ближе вам.",
+
+    "cta.title":"Места на ближайший урок заканчиваются",
+    "cd.d":"дней","cd.h":"часов","cd.m":"мин","cd.s":"сек",
+    "prog.of":"из","prog.spots":"мест занято",
+    "cta.b1":"✓ 1 час практики в ArchiCAD + Q&A","cta.b2":"✓ PDF-гайд + чек-лист в подарок","cta.b3":"✓ Скидка 20% на основной курс",
+    "form.name":"Имя","form.phone":"Телефон","form.city":"Город","form.lang":"Язык",
+    "form.opt1":"Русский","form.opt2":"Узбекский",
+    "form.consent":"Согласен на обработку персональных данных",
+    "form.submit":"Записаться на урок",
+    "form.policy":"Звоним только для подтверждения. Не спамим. Можно отписаться в любой момент.",
+    "form.phoneError":"Введите номер полностью — 9 цифр после +998",
+
+    "ftr.about":"Школа дизайна и архитектуры №1 в Узбекистане. С 2018 года.",
+    "ftr.contact":"Контакты","ftr.cities":"Адреса","ftr.social":"Соцсети",
+    "ftr.privacy":"Политика конфиденциальности",
+    "ftr.addr.tsh":"Ташкент · Мирзо-Улугбекский р-н, ул. Хирмонтепа, 34Б (м. Буюк Ипак Йули)",
+    "ftr.addr.smr":"Самарканд · ул. Давлатабад",
+    "ftr.addr.frg":"Фергана · ул. Комус, 40",
+    "sticky.text":"Записаться бесплатно",
+    "modal.eyebrow":"Бесплатный открытый урок",
+    "modal.title":"Запишитесь на ближайший урок",
+    "modal.lead":"Менеджер свяжется с вами в течение 15 минут — подтвердит место, дату и время.",
+    "modal.b1":"✓ 1 час практики в ArchiCAD + Q&A",
+    "modal.b2":"✓ PDF-гайд + чек-лист в подарок",
+    "modal.b3":"✓ Скидка 20% на основной курс",
+  },
+  uz: {
+    "nav.fit":"To‘g‘ri keladimi?","nav.program":"Dastur","nav.mentor":"Spiker","nav.works":"Ishlar","nav.faq":"Savollar","nav.signup":"Yozilish",
+    "nav.cityAria":"Shahar",
+    "hero.eyebrow":"Bepul ochiq dars · «Arxitektura» kursi",
+    "hero.title1":"Birinchi binoyingizni","hero.title2":"bir oqshomda","hero.title3":"loyihalang. <em>Bepul.</em>",
+    "hero.subtitle":"60 daqiqada ArchiCAD dasturida o‘z uyingiz konsepsiyasini yaratasiz, O‘zbekistonda arxitektorlar qancha topishini bilasiz — va bu kasb sizniki ekanini tushunasiz.",
+    "hero.cta":"Bepul yozilish","hero.cta2":"Dars dasturi",
+    "hero.social":"Maktabning 2400+ bitiruvchisi · 8 yil · amaliyotchi mentorlar",
+    "hero.micro":"🔒 Spam yo‘q. Sana va vaqtni tasdiqlashda kelishamiz.",
+    "hero.alt":"Zamonaviy uyning 3D maketi",
+    "hero.hint":"3D sahna · kursorni olib boring",
+    "trust.t1":"Bozorda 8 yil","trust.t2":"2400+ bitiruvchi","trust.t3":"Amaliyotchi arxitektor","trust.t4":"O‘zbekistonning 3 shahri",
+    "ticker.t1":"60 daqiqa amaliyot","ticker.t2":"Uy konsepsiyasi noldan","ticker.t3":"Har kimga 3 ta sovg‘a",
+
+    "fear.kicker":"90% odamni to‘xtatadigan 3 ta afsona",
+    "fear.title":"«Arxitektura — men uchun emas».",
+    "fear.title2":"3 ta afsonani bir oqshomda tahlil qilamiz.",
+    "fear.q1":"«Men rasm chiza olmayman»",
+    "fear.a1":"Zamonaviy arxitektor dasturlarda loyihalaydi. Akademik rasmdan ko‘ra <b>mantiq, makon hissi va ko‘nikma</b> muhimroq — bularni kursda rivojlantiramiz.",
+    "fear.q2":"«Chizmachilik va dasturlar qiyin»",
+    "fear.a2":"Ochiq darsning <b>1 soatida</b> ArchiCAD’da uy konsepsiyasini qilasiz — devorlar, derazalar, tom va 3D ko‘rinish. Spiker har bir bosishni ko‘rsatadi.",
+    "fear.q3":"«Arxitektorlikka o‘qish — universitetda 5–6 yil»",
+    "fear.a3":"Xususiy uylar va interyer obyektlarini loyihalashni <b>6 oylik amaliyotda</b> o‘rgansa bo‘ladi. Birinchi tijorat buyurtmalari uchun diplom shart emas.",
+
+    "ben.title":"1 soatlik ochiq darsda",
+    "ben.kicker":"O‘zingiz bilan nima olib ketasiz",
+    "ben.b1t":"ArchiCAD’dagi birinchi loyiha",
+    "ben.b1d":"Uy konsepsiyasi: reja, devorlar, derazalar, tom va 3D vizualizatsiya. Faylni portfolioga olasiz.",
+    "ben.b2t":"Kasb ichkaridan",
+    "ben.b2d":"O‘zbekistonda arxitektor nima bilan shug‘ullanadi: xususiy uylar, kafelar, turar-joy majmualari.",
+    "ben.b3t":"Haqiqiy maosh raqamlari",
+    "ben.b3d":"2026-yilda arxitektorlar va vizualizatorlarga qancha to‘lashadi — hh.uz va Upwork ma’lumotlari.",
+    "ben.b4t":"6 oylik reja",
+    "ben.b4d":"Bosqichma-bosqich yo‘l: noldan birinchi tijorat buyurtmasigacha.",
+    "ben.b5t":"Savollaringizga javoblar",
+    "ben.b5d":"Spiker bilan Q&A — shaxsan yoki onlayn format uchun Zoom orqali.",
+    "ben.foot":"VA HAMMA ishtirokchilar 3 ta sovg‘a oladi ↓",
+
+    "gift.title":"Ro‘yxatdan o‘tganlar uchun sovg‘alar",
+    "gift.l1":"SOVG‘A 1","gift.l2":"SOVG‘A 2","gift.l3":"SOVG‘A 3",
+    "gift.t1":"PDF qo‘llanma «O‘zbekistonda arxitektor kasbi 2026»",
+    "gift.d1":"36 sahifa: bozor, dasturlar, loyiha narxlari, nimadan boshlash.",
+    "gift.t2":"Chek-list «Loyiha va vizualizatsiyaga birinchi 5 buyurtma»",
+    "gift.d2":"12 qadam: Instagram’dagi portfoliodan imzolangan shartnomagacha.",
+    "gift.t3":"Asosiy kursga 20% chegirma promokodi",
+    "gift.d3":"Ochiq darsdan keyin 7 kun amal qiladi.",
+    "gift.note":"Barcha sovg‘alar ro‘yxatdan o‘tganingizdan keyin 5 daqiqa ichida WhatsApp’ga keladi.",
+    "gift.cta":"Sovg‘alarni olish va yozilish",
+
+    "prog.kicker":"Oqshom taymingi",
+    "prog.title":"Ochiq dars dasturi","prog.mins":"· 60 daqiqa",
+    "t1.t":"Tanishuv va 2026 bozori","t1.d":"Talab qayerda: xususiy uylar, HoReCa, turar-joy majmualari — va bunga qancha to‘lashadi.",
+    "t2.t":"ArchiCAD: o‘rnatish va interfeys","t2.d":"O‘z noutbukingizda yoki bizning kompyuterda ishlaysiz — joy bilan ta’minlaymiz.",
+    "t3.t":"Uy konsepsiyasini noldan loyihalaymiz","t3.d":"Devorlar, derazalar, tom, 3D ko‘rinish — arxitektor rahbarligida. Faylni o‘zingiz bilan olasiz.",
+    "t4.t":"Birinchi buyurtmaga qanday chiqish","t4.d":"Mijozlarni qayerdan topish, uy loyihasi va vizualizatsiya yangi boshlovchiga qancha turadi.",
+    "t5.t":"Q&A — istalgan savolingizni berasiz","t5.d":"Shaxsan yoki Zoom orqali — onlayn format uchun.",
+    "prog.note":"📌 Noutbukingizni olib keling — ArchiCAD’ni birga o‘rnatamiz. Noutbuk bo‘lmasa — joyida kompyuter beramiz.",
+
+    "video.kicker":"Chizmadan — binogacha",
+    "video.title":"Arxitektor ishi shunday ko‘rinadi",
+    "video.lead":"Rejadagi birinchi chiziqdan fotorealistik vizualizatsiyagacha — bu yo‘lni kursda bosib o‘tasiz. Birinchi qadamni ochiq darsda qo‘yasiz.",
+    "video.chip":"ARCHICAD → 3D",
+
+    "m.kicker":"Ochiq dars spikeri",
+    "m.name":"Timur Rahimov",
+    "m.role":"Amaliyotchi arxitektor · INTERNO School «Arxitektura» kursining bosh mentori",
+    "m.l1":"Turar-joy va jamoat binolarini loyihalashda 10+ yil",
+    "m.l2":"Toshkent va Samarqandda 40+ amalga oshirilgan obyekt",
+    "m.l3":"ArchiCAD, AutoCAD va 3ds Max bo‘yicha ekspert",
+    "m.l4":"300+ talabaga loyihalashni noldan o‘rgatgan",
+    "m.quote":"«Men sizga kurs sotmayman. Bir soat ichida o‘z qo‘lingiz bilan uy konsepsiyasini yig‘asiz va arxitektor qanday fikrlashini ko‘rasiz. Yoqsa — o‘qishga keling. Yo‘q — sizda birinchi loyiha va kasb haqida halol tushuncha qoladi.»",
+    "m.cta":"Timurga yozilish",
+
+    "works.kicker":"Talabalar portfoliosi",
+    "works.title":"Kurs talabalarining ishlari",
+    "works.lead":"O‘qishning 4-oyiga kelib talabalar qilgan konsepsiya va vizualizatsiyalar.",
+    "works.cta":"Men ham xohlayman — yozilish",
+    "works.c1":"Xususiy uy · Toshkent",
+    "works.c2":"Turar-joy majmuasi hovlisi · Samarqand",
+    "works.c3":"Qahvaxona · Toshkent",
+    "works.c4":"Basseynli villa · Chorvoq",
+    "works.c5":"Ofis binosi · Toshkent",
+    "works.c6":"Mahalla markazi · Farg‘ona",
+    "works.badge":"O‘qishning 4-oyi",
+
+    "model.kicker":"Interaktiv",
+    "model.title":"Talaba loyihasini 3D’da aylantiring",
+    "model.lead":"Kursda yig‘ilgan uy konsepsiyasi — to‘g‘ridan-to‘g‘ri brauzeringizda. Har tomondan ko‘rish uchun kursor bilan torting.",
+    "model.load":"3D modelni yuklash",
+    "model.hint":"Aylantiring · g‘ildirak bilan yaqinlashtiring",
+
+    "sal.kicker":"Kasbdagi daromad",
+    "sal.title":"Arxitektor qancha topadi",
+    "sal.lead":"Raqamlar — hh.uz, Glassdoor vakansiyalari va Upwork buyurtmalari asosida (2026-yil iyul).",
+    "sal.j":"0–6 oy","sal.m":"6–18 oy","sal.s":"1.5+ yil",
+    "sal.uz":"O‘zbekistonda","sal.rem":"Masofadan / xorij",
+    "sal.note":"Masofadan ishlaydigan vizualizator va BIM mutaxassislari valyutada topadi — bozor global.",
+    "sal.cta":"Men ham xohlayman — yozilish",
+
+    "quiz.title":"Arxitektura sizga to‘g‘ri keladimi?",
+    "quiz.lead":"5 ta qisqa savol · 30 soniya · mentordan shaxsiy xulosa",
+    "quiz.restart":"← Qaytadan o‘tish",
+    "q1.t":"Atrofdagi arxitekturaga e’tibor berasizmi — chiroyli fasadlar, noodatiy uylar, bino detallari?",
+    "q1.a1":"Ha, doim","q1.a2":"Ba’zan","q1.a3":"E’tibor bermayman",
+    "q2.t":"Kasbda sizni nima ko‘proq qiziqtiradi?",
+    "q2.a1":"Quriladigan narsani yaratish","q2.a2":"Barqaror daromad","q2.a3":"Masofadan ishlash","q2.a4":"Hammasi birga",
+    "q3.t":"O‘qishga qancha vaqt ajrata olasiz?",
+    "q3.a1":"Kuniga 1–2 soat","q3.a2":"Kuniga 3–4 soat","q3.a3":"Faqat dam olish kunlari",
+    "q4.t":"6 oydan keyin qanday natija olmoqchisiz?",
+    "q4.a1":"Birinchi buyurtma va daromad","q4.a2":"Yangi kasb va portfolio","q4.a3":"O‘zimnikimi, shunchaki tushunish",
+    "q5.t":"Siz qaysi shahardasiz?",
+    "q5.a1":"Toshkent","q5.a2":"Samarqand","q5.a3":"Farg‘ona","q5.a4":"Boshqa shahar",
+    "verdict.high":"<b>A’lo natija:</b> javoblaringizga ko‘ra arxitektor kasbi sizga mos — bepul darsga keling va amalda tekshirib ko‘ring.",
+    "verdict.mid":"<b>Yaxshi salohiyat:</b> sizda qiziqish va motivatsiya bor — ochiq dars bu kasb sizniki ekanini aniq tushunishga yordam beradi.",
+    "verdict.low":"<b>Siz hali ikkilanyapsiz</b> — bepul dars hech narsaga majburlamaydi va qaror qabul qilishga yordam beradi.",
+
+    "why.title":"Nega aynan INTERNO",
+    "why.l1":"yil bozorda · 2018-yildan beri",
+    "why.l2":"bitiruvchi — O‘zbekistondagi eng yirik dizayn maktabi",
+    "why.l3":"bitiruvchi kasb bo‘yicha ishlaydi — ijtimoiy tarmoqlar orqali tekshiramiz",
+    "why.l4":"shahar — Toshkent, Samarqand, Farg‘ona",
+
+    "faq.title":"Ko‘p so‘raladigan savollar",
+    "faq.q1":"Dars haqiqatan bepulmi? Kurs sotasizmi?",
+    "faq.a1":"Ha, bepul. Hech kim hech narsa sotmaydi — lekin yoqsa, asosiy kursga qanday kirishni aytamiz.",
+    "faq.q2":"Men hech qachon chizmagan va loyihalamaganman. Uddalaymanmi?",
+    "faq.a2":"Dars noldan qurilgan. Spiker har bir qadamni ko‘rsatadi — siz takrorlaysiz va savol berasiz.",
+    "faq.q3":"Kuchli noutbuk kerakmi?",
+    "faq.a3":"Dars uchun oxirgi yillardagi istalgan noutbuk yetadi. Noutbuk bo‘lmasa — joyida kompyuter beramiz.",
+    "faq.q4":"Men Samarqand/Farg‘onada yashayman. Qanday qatnashsam bo‘ladi?",
+    "faq.a4":"Ochiq darslar 3 ta shaharning barchasida o‘tkaziladi. Shahringizdagi manzilni yozilganingizda yuboramiz.",
+    "faq.q5":"Asosiy kurs qancha davom etadi?","faq.a5":"6 oy. Haftada 2 marta, 2 soatdan. Qo‘shimcha — real obyektlarda amaliyot.",
+    "faq.q6":"Diplom berasizmi?","faq.a6":"Ha, saytimizda tekshirsa bo‘ladigan QR-kodli sertifikat beramiz.",
+    "faq.q7":"Yozilib, kela olmasam-chi?","faq.a7":"Shunchaki bizga yozing — keyingi darsga ko‘chiramiz. Hech qanday muammosiz.",
+    "faq.q8":"Arxitektura interyer dizaynidan nimasi bilan farq qiladi?","faq.a8":"Arxitektor binoning o‘zini loyihalaydi: rejalar, fasadlar, konstruksiyalar. Dizayner ichki makon bilan ishlaydi. Darsda ikkala kasbni tahlil qilamiz — qaysi biri yaqinligini tushunasiz.",
+
+    "cta.title":"Eng yaqin darsga joylar tugayapti",
+    "cd.d":"kun","cd.h":"soat","cd.m":"daq","cd.s":"son",
+    "prog.of":"/","prog.spots":"joy band",
+    "cta.b1":"✓ 1 soat ArchiCAD amaliyoti + Q&A","cta.b2":"✓ Sovg‘aga PDF qo‘llanma + chek-list","cta.b3":"✓ Asosiy kursga 20% chegirma",
+    "form.name":"Ism","form.phone":"Telefon","form.city":"Shahar","form.lang":"Til",
+    "form.opt1":"Rus tili","form.opt2":"O‘zbek tili",
+    "form.consent":"Shaxsiy ma’lumotlarni qayta ishlashga roziman",
+    "form.submit":"Darsga yozilish",
+    "form.policy":"Faqat tasdiqlash uchun qo‘ng‘iroq qilamiz. Spam qilmaymiz. Istalgan vaqtda obunadan chiqsangiz bo‘ladi.",
+    "form.phoneError":"Raqamni to‘liq kiriting — +998 dan keyin 9 ta raqam",
+
+    "ftr.about":"O‘zbekistondagi №1 dizayn va arxitektura maktabi. 2018-yildan beri.",
+    "ftr.contact":"Kontaktlar","ftr.cities":"Manzillar","ftr.social":"Ijtimoiy tarmoqlar",
+    "ftr.privacy":"Maxfiylik siyosati",
+    "ftr.addr.tsh":"Toshkent · Mirzo Ulug‘bek tumani, Xirmontepa ko‘chasi, 34B (Buyuk Ipak Yo‘li metrosi)",
+    "ftr.addr.smr":"Samarqand · Davlatobod ko‘chasi",
+    "ftr.addr.frg":"Farg‘ona · Komus ko‘chasi, 40",
+    "sticky.text":"Bepul yozilish",
+    "modal.eyebrow":"Bepul ochiq dars",
+    "modal.title":"Eng yaqin darsga yoziling",
+    "modal.lead":"Menejer 15 daqiqa ichida siz bilan bog‘lanadi — joy, sana va vaqtni tasdiqlaydi.",
+    "modal.b1":"✓ 1 soat ArchiCAD amaliyoti + Q&A",
+    "modal.b2":"✓ Sovg‘aga PDF qo‘llanma + chek-list",
+    "modal.b3":"✓ Asosiy kursga 20% chegirma",
+  }
+};
+
+const cityNames = {
+  ru: {tsh:"Ташкент",smr:"Самарканд",frg:"Фергана"},
+  uz: {tsh:"Toshkent",smr:"Samarqand",frg:"Farg‘ona"},
+};
+
+// Resolve lang + city synchronously: URL → localStorage → navigator.language → uz.
+(function(){
+  var p = new URLSearchParams(location.search);
+  var qLang = p.get('lang');
+  var qCity = p.get('city');
+  if(qCity === 'fer') qCity = 'frg'; // ad-campaign alias for Fergana
+  var lang = (qLang === 'ru' || qLang === 'uz') ? qLang : null;
+  var city = (qCity === 'tsh' || qCity === 'smr' || qCity === 'frg') ? qCity : null;
+  try {
+    if(lang) localStorage.setItem('interno_lang', lang); else lang = localStorage.getItem('interno_lang');
+    if(city) localStorage.setItem('interno_city', city); else city = localStorage.getItem('interno_city');
+  } catch(_) {}
+  if(lang !== 'ru' && lang !== 'uz') lang = /^ru/i.test(navigator.language || '') ? 'ru' : 'uz';
+  if(city !== 'tsh' && city !== 'smr' && city !== 'frg') city = 'tsh';
+  document.documentElement.lang = lang;
+  document.documentElement.setAttribute('data-city', city);
+
+  var META = {
+    ru: {
+      title: 'Открытый урок по архитектуре · INTERNO School · Ташкент / Самарканд / Фергана',
+      desc: 'Бесплатный открытый урок INTERNO School. Спроектируйте концепцию своего первого дома в ArchiCAD за 1 час. Архитектор-практик · 10+ лет опыта.'
+    },
+    uz: {
+      title: 'Arxitektura bo‘yicha ochiq dars · INTERNO School · Toshkent / Samarqand / Farg‘ona',
+      desc: 'INTERNO School’ning bepul ochiq darsi. 1 soatda ArchiCAD’da birinchi uyingiz konsepsiyasini loyihalang. Amaliyotchi arxitektor · 10+ yil tajriba.'
+    }
+  };
+  document.title = META[lang].title;
+  var md = document.querySelector('meta[name="description"]');
+  if(md) md.setAttribute('content', META[lang].desc);
+})();
+
+// «Ближайший урок: 21 августа, 19:00 · осталось 7 мест»
+const I18N_MONTHS = {
+  ru: ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],
+  uz: ['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'],
+};
+function ruPlural(n, one, few, many){
+  n = Math.abs(n) % 100;
+  if(n > 10 && n < 20) return many;
+  var d = n % 10;
+  if(d === 1) return one;
+  if(d > 1 && d < 5) return few;
+  return many;
+}
+function lessonLineText(lang){
+  var L = window.NEXT_LESSON;
+  var d = new Date(L.date + 'T00:00:00');
+  var day = d.getDate(), m = I18N_MONTHS[lang][d.getMonth()];
+  if(lang === 'uz') return 'Yaqin dars: ' + day + '-' + m + ', ' + L.time + ' · ' + L.seatsLeft + ' ta joy qoldi';
+  return 'Ближайший урок: ' + day + ' ' + m + ', ' + L.time + ' · осталось ' + L.seatsLeft + ' ' + ruPlural(L.seatsLeft, 'место', 'места', 'мест');
+}
+
+// Applies translations to every parsed node. Safe to call on a partially
+// parsed DOM — it is invoked right after the hero markup and again at the end
+// of <body>, so above-the-fold content is localized before first paint.
+function applyLang(lang){
+  const city = document.documentElement.getAttribute('data-city') || 'tsh';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v = dict[lang]?.[el.getAttribute('data-i18n')];
+    if(v!==undefined) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el=>{
+    const v = dict[lang]?.[el.getAttribute('data-i18n-alt')];
+    if(v!==undefined) el.alt = v.replace(/<[^>]*>/g,'');
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+    const v = dict[lang]?.[el.getAttribute('data-i18n-aria')];
+    if(v!==undefined) el.setAttribute('aria-label', v.replace(/<[^>]*>/g,''));
+  });
+  document.querySelectorAll('.lang__btn').forEach(b=>{
+    b.classList.toggle('is-active', b.dataset.lang===lang);
+  });
+  document.querySelectorAll('.city-name').forEach(el=>{
+    el.textContent = cityNames[lang][city] || cityNames[lang].tsh;
+  });
+  const sel = document.getElementById('citySelect');
+  if(sel){
+    [...sel.options].forEach(o=>{ o.textContent = cityNames[lang][o.value]; });
+    sel.value = city;
+  }
+  document.querySelectorAll('form select[name="city"]').forEach(s=>{
+    [...s.options].forEach(o=>{
+      if(cityNames[lang][o.value]) o.textContent = cityNames[lang][o.value];
+    });
+    if([...s.options].some(o=>o.value===city)) s.value = city;
+  });
+  document.querySelectorAll('form select[name="lang"]').forEach(s=>{
+    if([...s.options].some(o=>o.value===lang)) s.value = lang;
+  });
+  document.querySelectorAll('[data-lesson-line]').forEach(el=>{
+    el.textContent = lessonLineText(lang);
+  });
+  document.querySelectorAll('[data-addr]').forEach(el=>{
+    el.classList.toggle('is-active', el.dataset.addr===city);
+  });
+  const L = window.NEXT_LESSON;
+  const taken = document.querySelector('[data-seats-taken]');
+  if(taken) taken.textContent = L.seatsTotal - L.seatsLeft;
+  const total = document.querySelector('[data-seats-total]');
+  if(total) total.textContent = L.seatsTotal;
+  const fill = document.querySelector('.progress__fill');
+  if(fill) fill.style.width = Math.round((L.seatsTotal - L.seatsLeft) / L.seatsTotal * 100) + '%';
+  try { localStorage.setItem('interno_lang', lang); } catch(_) {}
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin />
+<link rel="preconnect" href="https://connect.facebook.net" />
+<link rel="preload" as="image" href="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093914_2e22e5ca-cb04-4972-b5de-9b4856658faf.png" fetchpriority="high" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4251277901808457');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- Blueprint grid backdrop (fixed, behind everything) -->
+<div class="bp-grid" aria-hidden="true"></div>
+
+<!-- ===== HEADER: floating glass pill ===== -->
+<header class="nav">
+  <div class="nav__inner liquid-glass">
+    <a class="logo" href="#">
+      <img src="logo-ru.svg" alt="INTERNO School" class="logo__img logo__img--ru" />
+      <img src="logo-uz.svg" alt="INTERNO School" class="logo__img logo__img--uz" />
+    </a>
+    <nav class="nav__links">
+      <a href="#fit" data-i18n="nav.fit">Подойдёт?</a>
+      <a href="#program" data-i18n="nav.program">Программа</a>
+      <a href="#mentor" data-i18n="nav.mentor">Спикер</a>
+      <a href="#works" data-i18n="nav.works">Работы</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="nav__right">
+      <select class="city-select" id="citySelect" aria-label="Город" data-i18n-aria="nav.cityAria">
+        <option value="tsh">Ташкент</option>
+        <option value="smr">Самарканд</option>
+        <option value="frg">Фергана</option>
+      </select>
+      <div class="lang">
+        <button class="lang__btn is-active" data-lang="ru">RU</button>
+        <button class="lang__btn" data-lang="uz">UZ</button>
+      </div>
+      <button type="button" class="btn btn--primary nav__cta" data-modal="signup" data-i18n="nav.signup">Записаться</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__content container">
+    <div class="hero__main">
+      <div class="hero__badge liquid-glass">
+        <span class="dot"></span>
+        <span><span data-i18n="hero.eyebrow">Бесплатный открытый урок · курс «Архитектура»</span> · <span class="city-name">Ташкент</span></span>
+      </div>
+      <h1 class="hero__title" id="heroTitle">
+        <span data-i18n="hero.title1">Спроектируйте своё</span><br/>
+        <span data-i18n="hero.title2">первое здание</span><br/>
+        <span data-i18n="hero.title3">за 1 вечер. <em>Бесплатно.</em></span>
+      </h1>
+      <p class="hero__subtitle" data-i18n="hero.subtitle">
+        За 60 минут создадите концепцию собственного дома в ArchiCAD, узнаете сколько зарабатывают архитекторы в Узбекистане — и поймёте, ваша ли это профессия.
+      </p>
+      <p class="hero__lesson lesson-next" data-lesson-line></p>
+
+      <div class="trust-chips">
+        <span class="trust-chip liquid-glass" data-i18n="trust.t1">8 лет на рынке</span>
+        <span class="trust-chip liquid-glass" data-i18n="trust.t2">2400+ выпускников</span>
+        <span class="trust-chip liquid-glass" data-i18n="trust.t3">Архитектор-практик</span>
+        <span class="trust-chip liquid-glass" data-i18n="trust.t4">3 города Узбекистана</span>
+      </div>
+
+      <div class="hero__actions">
+        <button type="button" class="btn btn--primary btn--lg" data-modal="signup">
+          <span data-i18n="hero.cta">Записаться бесплатно</span>
+          <span class="arrow"></span>
+        </button>
+        <a href="#program" class="btn btn--ghost btn--lg" data-i18n="hero.cta2">Программа урока</a>
+      </div>
+      <p class="hero__social" data-i18n="hero.social">2400+ выпускников школы · 8 лет · менторы-практики</p>
+      <p class="hero__microcopy" data-i18n="hero.micro">🔒 Без спама. Дату и время согласуем при подтверждении.</p>
+    </div>
+
+    <aside class="hero-visual" id="heroVisual">
+      <!-- Многослойная парящая сцена: диорама дома + «архитектурные» спутники
+           на разных глубинах (data-depth — сила мышиного параллакса).
+           Размерные SVG-линии подчёркивают чертёжную тему. -->
+      <div class="hero-stage">
+        <svg class="hero-dims" viewBox="0 0 560 560" fill="none" aria-hidden="true">
+          <g stroke="currentColor" stroke-width="1">
+            <line x1="60" y1="530" x2="500" y2="530"/>
+            <line x1="60" y1="522" x2="60" y2="538"/>
+            <line x1="500" y1="522" x2="500" y2="538"/>
+            <line x1="30" y1="90" x2="30" y2="470"/>
+            <line x1="22" y1="90" x2="38" y2="90"/>
+            <line x1="22" y1="470" x2="38" y2="470"/>
+          </g>
+          <text x="280" y="552" text-anchor="middle" class="hero-dims__t">12 400</text>
+          <text x="18" y="284" text-anchor="middle" transform="rotate(-90 18 284)" class="hero-dims__t">9 800</text>
+        </svg>
+        <div class="hero-layer hero-layer--main" data-depth="10" style="--d:0s;--fd:8s">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093914_2e22e5ca-cb04-4972-b5de-9b4856658faf.png"
+            width="1024" height="1024" fetchpriority="high" decoding="async"
+            alt="3D-макет современного дома" data-i18n-alt="hero.alt" />
+        </div>
+        <div class="hero-layer hero-layer--blueprint" data-depth="34" style="--d:.25s;--fd:5.2s">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093915_68f9afdf-fd05-4f63-96fe-75cced4c7f65_min.png" alt="" aria-hidden="true" width="200" height="200" loading="lazy" decoding="async" />
+        </div>
+        <div class="hero-layer hero-layer--compass" data-depth="24" style="--d:.4s;--fd:6.4s">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093916_f13bd29b-50f4-4699-b850-9f95cc2ff2f6_min.png" alt="" aria-hidden="true" width="200" height="200" loading="lazy" decoding="async" />
+        </div>
+        <div class="hero-layer hero-layer--helmet" data-depth="18" style="--d:.55s;--fd:7.2s">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093917_cfa4e869-6330-47bf-ac3e-7129c4ded63b_min.png" alt="" aria-hidden="true" width="200" height="200" loading="lazy" decoding="async" />
+        </div>
+        <div class="hero-layer hero-layer--house" data-depth="28" style="--d:.7s;--fd:5.8s">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093922_99cd7c5a-cc90-4085-adc9-6457666fd478_min.png" alt="" aria-hidden="true" width="200" height="200" loading="lazy" decoding="async" />
+        </div>
+        <span class="hero-spark" style="--sx:10%;--sy:20%;--sd:0s"></span>
+        <span class="hero-spark" style="--sx:84%;--sy:32%;--sd:1.1s"></span>
+        <span class="hero-spark" style="--sx:68%;--sy:80%;--sd:2.2s"></span>
+        <span class="hero-spark" style="--sx:30%;--sy:6%;--sd:1.7s"></span>
+      </div>
+      <p class="hero-visual__hint" data-i18n="hero.hint">3D-сцена · наведите курсор</p>
+    </aside>
+  </div>
+</section>
+<!-- Localize header + hero immediately after they are parsed, before the rest
+     of the page (and before first paint on slow connections). -->
+<script>applyLang(document.documentElement.lang);</script>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>ArchiCAD <i>·</i></span><span>AutoCAD <i>·</i></span><span>3ds Max <i>·</i></span><span>Lumion <i>·</i></span><span>SketchUp <i>·</i></span><span data-i18n="ticker.t1">60 минут практики</span><span><i>·</i></span><span data-i18n="ticker.t2">Концепция дома с нуля</span><span><i>·</i></span><span data-i18n="ticker.t3">3 подарка каждому</span><span><i>·</i></span>
+    <span>ArchiCAD <i>·</i></span><span>AutoCAD <i>·</i></span><span>3ds Max <i>·</i></span><span>Lumion <i>·</i></span><span>SketchUp <i>·</i></span><span data-i18n="ticker.t1">60 минут практики</span><span><i>·</i></span><span data-i18n="ticker.t2">Концепция дома с нуля</span><span><i>·</i></span><span data-i18n="ticker.t3">3 подарка каждому</span><span><i>·</i></span>
+  </div>
+</div>
+
+<!-- ===== FEARS / MYTHS ===== -->
+<section class="fear" id="fit">
+  <div class="container">
+    <div class="fear__head reveal">
+      <span class="sec-eyebrow" data-i18n="fear.kicker">3 мифа, которые останавливают 90% людей</span>
+      <h2 class="fear__title">
+        <span data-i18n="fear.title">«Архитектура — это не для меня».</span>
+        <span class="accent" data-i18n="fear.title2">Разберём все 3 мифа за один вечер.</span>
+      </h2>
+    </div>
+
+    <div class="fear__grid">
+      <article class="fear__card liquid-glass reveal">
+        <span class="fear__num">01</span>
+        <div class="fear__bad">
+          <span class="fear__x" aria-hidden="true">×</span>
+          <span data-i18n="fear.q1">«Я не умею рисовать»</span>
+        </div>
+        <div class="fear__good">
+          <span class="fear__check" aria-hidden="true">✓</span>
+          <span data-i18n="fear.a1">Современный архитектор проектирует в программах. <b>Логика, пространство и насмотренность</b> важнее академического рисунка — а их мы развиваем на курсе.</span>
+        </div>
+      </article>
+
+      <article class="fear__card fear__card--accent liquid-glass reveal reveal-d1">
+        <span class="fear__num">02</span>
+        <div class="fear__bad">
+          <span class="fear__x" aria-hidden="true">×</span>
+          <span data-i18n="fear.q2">«Черчение и программы — это сложно»</span>
+        </div>
+        <div class="fear__good">
+          <span class="fear__check" aria-hidden="true">✓</span>
+          <span data-i18n="fear.a2">За <b>1 час</b> открытого урока вы сделаете концепцию дома в ArchiCAD — стены, окна, крыша и 3D-вид. Спикер покажет каждый клик.</span>
+        </div>
+      </article>
+
+      <article class="fear__card liquid-glass reveal reveal-d2">
+        <span class="fear__num">03</span>
+        <div class="fear__bad">
+          <span class="fear__x" aria-hidden="true">×</span>
+          <span data-i18n="fear.q3">«Учиться на архитектора — 5–6 лет в вузе»</span>
+        </div>
+        <div class="fear__good">
+          <span class="fear__check" aria-hidden="true">✓</span>
+          <span data-i18n="fear.a3">Проектировать частные дома и интерьерные объекты можно научиться за <b>6 месяцев практики</b>. Диплом вуза не нужен, чтобы брать первые коммерческие заказы.</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BENEFITS: bento grid ===== -->
+<section class="benefits" id="lesson">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-eyebrow" data-i18n="ben.kicker">Что вы унесёте с собой</span>
+      <h2 class="display sm benefits__title" data-i18n="ben.title">За 1 час на открытом уроке</h2>
+    </div>
+
+    <div class="bento">
+      <article class="bento__card bento__card--lg liquid-glass reveal">
+        <img class="bento__icon bento__icon--lg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093923_2cec07d4-57b9-47d6-9aa8-2a740a1ca42c_min.png" alt="" loading="lazy" decoding="async" />
+        <span class="bento__num">01</span>
+        <h3 class="bento__title" data-i18n="ben.b1t">Первый проект в ArchiCAD</h3>
+        <p class="bento__desc" data-i18n="ben.b1d">Концепция дома: план, стены, окна, крыша и 3D-визуализация. Файл заберёте в портфолио.</p>
+      </article>
+      <article class="bento__card liquid-glass reveal reveal-d1">
+        <span class="bento__num">02</span>
+        <h3 class="bento__title" data-i18n="ben.b2t">Профессия изнутри</h3>
+        <p class="bento__desc" data-i18n="ben.b2d">Чем занимается архитектор в Узбекистане: частные дома, кафе, жилые комплексы.</p>
+      </article>
+      <article class="bento__card liquid-glass reveal reveal-d2">
+        <img class="bento__icon" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093932_e2bc1df0-63a5-4faf-a777-b751e7552dcf_min.png" alt="" loading="lazy" decoding="async" />
+        <span class="bento__num">03</span>
+        <h3 class="bento__title" data-i18n="ben.b3t">Реальные цифры зарплат</h3>
+        <p class="bento__desc" data-i18n="ben.b3d">Сколько платят архитекторам и визуализаторам в 2026 — по данным hh.uz и Upwork.</p>
+      </article>
+      <article class="bento__card liquid-glass reveal reveal-d1">
+        <span class="bento__num">04</span>
+        <h3 class="bento__title" data-i18n="ben.b4t">План на 6 месяцев</h3>
+        <p class="bento__desc" data-i18n="ben.b4d">Пошаговый маршрут: от нуля до первого коммерческого заказа.</p>
+      </article>
+      <article class="bento__card liquid-glass reveal reveal-d2">
+        <span class="bento__num">05</span>
+        <h3 class="bento__title" data-i18n="ben.b5t">Ответы на ваши вопросы</h3>
+        <p class="bento__desc" data-i18n="ben.b5d">Q&A со спикером — лично или в Zoom для онлайн-формата.</p>
+      </article>
+    </div>
+
+    <p class="benefits__foot reveal" data-i18n="ben.foot">И ВСЕ присутствующие получают 3 подарка ↓</p>
+  </div>
+</section>
+
+<!-- ===== GIFTS ===== -->
+<section class="gifts">
+  <div class="container">
+    <h2 class="display sm reveal" data-i18n="gift.title">Подарки за регистрацию</h2>
+    <div class="gifts__grid">
+      <article class="gift liquid-glass reveal">
+        <img class="gift__icon" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093924_503d51f2-70d4-498c-970a-8f6c22a32489_min.png" alt="" loading="lazy" decoding="async" />
+        <div class="gift__num" data-i18n="gift.l1">ПОДАРОК 1</div>
+        <h3 class="gift__title" data-i18n="gift.t1">PDF-гайд «Профессия архитектора в Узбекистане 2026»</h3>
+        <p class="gift__desc" data-i18n="gift.d1">36 страниц: рынок, софт, цены на проекты, с чего начать.</p>
+      </article>
+      <article class="gift liquid-glass reveal reveal-d1">
+        <img class="gift__icon" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093925_0b9230ac-2b5f-46ab-b25f-b7b6d9d0bdc3_min.png" alt="" loading="lazy" decoding="async" />
+        <div class="gift__num" data-i18n="gift.l2">ПОДАРОК 2</div>
+        <h3 class="gift__title" data-i18n="gift.t2">Чек-лист «Первые 5 заказов на проекты и визуализации»</h3>
+        <p class="gift__desc" data-i18n="gift.d2">12 шагов: от портфолио в Instagram до подписанного договора.</p>
+      </article>
+      <article class="gift gift--accent reveal reveal-d2">
+        <img class="gift__icon" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093931_949c4f4c-eed4-4729-b8b0-880e3ab8b3a0_min.png" alt="" loading="lazy" decoding="async" />
+        <div class="gift__num" data-i18n="gift.l3">ПОДАРОК 3</div>
+        <h3 class="gift__title" data-i18n="gift.t3">Промокод на скидку 20% на основной курс</h3>
+        <p class="gift__desc" data-i18n="gift.d3">Действует 7 дней после открытого урока.</p>
+      </article>
+    </div>
+    <p class="gifts__note" data-i18n="gift.note">Все подарки придут на WhatsApp в течение 5 минут после регистрации.</p>
+    <a href="#cta" class="btn btn--primary btn--lg btn--center"><span data-i18n="gift.cta">Получить подарки и записаться</span> <span class="arrow"></span></a>
+  </div>
+</section>
+
+<!-- ===== PROGRAM: blueprint timeline ===== -->
+<section class="program" id="program" data-viewcontent="program">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-eyebrow" data-i18n="prog.kicker">Тайминг вечера</span>
+      <h2 class="display sm program__title"><span data-i18n="prog.title">Программа открытого урока</span> <span class="muted" data-i18n="prog.mins">· 60 мин</span>
+        <img class="sec-ico" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093953_48178871-c01d-40af-8efe-c0a1cf8d9b3b_min.png" alt="" aria-hidden="true" width="88" height="88" loading="lazy" />
+      </h2>
+    </div>
+
+    <ol class="timeline liquid-glass reveal">
+      <li><span class="timeline__time">0–10</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t1.t">Знакомство и рынок 2026</b><p data-i18n="t1.d">Куда идёт спрос: частные дома, HoReCa, жилые комплексы — и сколько за это платят.</p></div></li>
+      <li><span class="timeline__time">10–25</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t2.t">ArchiCAD: установка и интерфейс</b><p data-i18n="t2.d">Работаете на своём ноутбуке или нашем — мы обеспечим место.</p></div></li>
+      <li><span class="timeline__time">25–50</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t3.t">Проектируем концепцию дома с нуля</b><p data-i18n="t3.d">Стены, окна, крыша, 3D-вид — под руководством архитектора. Файл унесёте с собой.</p></div></li>
+      <li><span class="timeline__time">50–55</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t4.t">Как выйти на первый заказ</b><p data-i18n="t4.d">Где искать клиентов, сколько стоит проект дома и визуализация для новичка.</p></div></li>
+      <li><span class="timeline__time">55–60</span><span class="timeline__tick" aria-hidden="true"></span><div><b data-i18n="t5.t">Q&amp;A — задаёте любые вопросы</b><p data-i18n="t5.d">Лично или через Zoom — для онлайн-формата.</p></div></li>
+    </ol>
+
+    <p class="program__note liquid-glass reveal" data-i18n="prog.note">📌 Возьмите ноутбук — ArchiCAD установим вместе. Если ноутбука нет — обеспечим компьютер на месте.</p>
+  </div>
+</section>
+
+<!-- ===== VIDEO: generated animation ===== -->
+<section class="showreel">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-eyebrow" data-i18n="video.kicker">Из чертежа — в здание</span>
+      <h2 class="display sm" data-i18n="video.title">Так выглядит работа архитектора</h2>
+      <p class="sec-sub" data-i18n="video.lead">От первой линии на плане до фотореалистичной визуализации — весь путь вы пройдёте на курсе. Первый шаг сделаете уже на открытом уроке.</p>
+    </div>
+    <figure class="showreel__frame liquid-glass reveal" id="showreelFrame">
+      <span class="showreel__chip" data-i18n="video.chip">ARCHICAD → 3D</span>
+      <video class="showreel__video" id="showreelVideo"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_094046_c4bf332f-10e6-4f9a-9c4c-927b9b03afca.mp4"
+        poster="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093319_a188b5d9-b4cf-4c1e-bd6f-57374f48c514.png"
+        muted loop playsinline preload="none" autoplay></video>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== MENTOR ===== -->
+<section class="mentor" id="mentor">
+  <div class="container mentor__inner liquid-glass reveal">
+    <div class="mentor__photo">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093952_710aebe9-143f-4fe1-adcf-355e7f68822b_min.webp" alt="Тимур Рахимов — архитектор" loading="lazy" decoding="async" />
+    </div>
+    <div class="mentor__info">
+      <div class="sec-eyebrow" data-i18n="m.kicker">Спикер открытого урока</div>
+      <h2 class="mentor__name" data-i18n="m.name">Тимур Рахимов</h2>
+      <p class="mentor__role" data-i18n="m.role">Архитектор-практик · ведущий ментор курса «Архитектура» в INTERNO School</p>
+      <ul class="mentor__list">
+        <li data-i18n="m.l1">10+ лет проектирования жилых и общественных зданий</li>
+        <li data-i18n="m.l2">40+ реализованных объектов в Ташкенте и Самарканде</li>
+        <li data-i18n="m.l3">Эксперт по ArchiCAD, AutoCAD и 3ds Max</li>
+        <li data-i18n="m.l4">Обучил 300+ студентов проектированию с нуля</li>
+      </ul>
+      <blockquote class="mentor__quote" data-i18n="m.quote">
+        «Я не буду продавать вам курс. За час вы своими руками соберёте концепцию дома и увидите, как думает архитектор. Зацепит — приходите учиться. Нет — у вас останется первый проект и честное понимание профессии.»
+      </blockquote>
+      <div class="mentor__actions">
+        <a href="#cta" class="btn btn--primary"><span data-i18n="m.cta">Записаться к Тимуру</span> <span class="arrow"></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORKS GALLERY ===== -->
+<section class="works" id="works">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-eyebrow" data-i18n="works.kicker">Портфолио студентов</span>
+      <h2 class="display sm" data-i18n="works.title">Работы студентов курса</h2>
+      <p class="sec-sub" data-i18n="works.lead">Концепции и визуализации, сделанные студентами к 4-му месяцу обучения.</p>
+    </div>
+
+    <div class="works__grid">
+      <figure class="work reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093759_90b6e5d0-82c4-4515-aba5-6a73660d9078_min.webp" alt="Частный дом — визуализация" data-i18n-alt="works.c1" loading="lazy" decoding="async" />
+        <figcaption><span data-i18n="works.c1">Частный дом · Ташкент</span><em class="work__badge" data-i18n="works.badge">4-й месяц обучения</em></figcaption>
+      </figure>
+      <figure class="work reveal reveal-d1">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093759_e5444695-d5d2-467d-946f-d634d3c562e9_min.webp" alt="Двор жилого комплекса — визуализация" data-i18n-alt="works.c2" loading="lazy" decoding="async" />
+        <figcaption><span data-i18n="works.c2">Двор жилого комплекса · Самарканд</span><em class="work__badge" data-i18n="works.badge">4-й месяц обучения</em></figcaption>
+      </figure>
+      <figure class="work reveal reveal-d2">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093759_a5a7e8d7-c1ba-4d3c-81b9-b8403510b220_min.webp" alt="Кофейня — визуализация фасада" data-i18n-alt="works.c3" loading="lazy" decoding="async" />
+        <figcaption><span data-i18n="works.c3">Кофейня · Ташкент</span><em class="work__badge" data-i18n="works.badge">4-й месяц обучения</em></figcaption>
+      </figure>
+      <figure class="work reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093759_37ac2d48-e247-4c26-9087-1705b6a42c1e_min.webp" alt="Вилла с бассейном — вечерняя визуализация" data-i18n-alt="works.c4" loading="lazy" decoding="async" />
+        <figcaption><span data-i18n="works.c4">Вилла с бассейном · Чарвак</span><em class="work__badge" data-i18n="works.badge">4-й месяц обучения</em></figcaption>
+      </figure>
+      <figure class="work reveal reveal-d1">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093759_f3c3ce3f-1525-41b8-a952-616eac21d0ae_min.webp" alt="Офисное здание — визуализация" data-i18n-alt="works.c5" loading="lazy" decoding="async" />
+        <figcaption><span data-i18n="works.c5">Офисное здание · Ташкент</span><em class="work__badge" data-i18n="works.badge">4-й месяц обучения</em></figcaption>
+      </figure>
+      <figure class="work reveal reveal-d2">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093759_860ca5fc-655c-45e2-afa3-4808d23bdded_min.webp" alt="Махаллинский центр — визуализация" data-i18n-alt="works.c6" loading="lazy" decoding="async" />
+        <figcaption><span data-i18n="works.c6">Махаллинский центр · Фергана</span><em class="work__badge" data-i18n="works.badge">4-й месяц обучения</em></figcaption>
+      </figure>
+    </div>
+
+    <a href="#cta" class="btn btn--primary btn--lg btn--center"><span data-i18n="works.cta">Хочу так же — записаться</span> <span class="arrow"></span></a>
+  </div>
+</section>
+
+<!-- ===== 3D MODEL VIEWER ===== -->
+<section class="model3d">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-eyebrow" data-i18n="model.kicker">Интерактив</span>
+      <h2 class="display sm" data-i18n="model.title">Покрутите проект студента в 3D</h2>
+      <p class="sec-sub" data-i18n="model.lead">Концепция дома, собранная на курсе, — прямо в вашем браузере. Тяните курсором, чтобы осмотреть со всех сторон.</p>
+    </div>
+    <div class="model3d__frame liquid-glass reveal" id="modelFrame"
+         data-glb="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_094011_9fd65654-8da9-4bac-9e86-6ce8c5df5721.glb"
+         data-poster="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20260815_093914_2e22e5ca-cb04-4972-b5de-9b4856658faf.png">
+      <button type="button" class="model3d__load btn btn--primary" id="modelLoadBtn">
+        <span data-i18n="model.load">Загрузить 3D-модель</span> <span class="arrow"></span>
+      </button>
+      <p class="model3d__hint" data-i18n="model.hint">Вращайте · приближайте колёсиком</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SALARY ===== -->
+<section class="salary">
+  <div class="container">
+    <div class="reveal">
+      <span class="sec-eyebrow" data-i18n="sal.kicker">Деньги в профессии</span>
+      <h2 class="display sm" data-i18n="sal.title">Сколько зарабатывает архитектор</h2>
+      <p class="sec-sub" data-i18n="sal.lead">Цифры — на основе вакансий hh.uz, Glassdoor и заказов Upwork (июль 2026).</p>
+    </div>
+
+    <div class="salary__grid">
+      <article class="salary__card liquid-glass reveal">
+        <div class="salary__lvl">Junior</div>
+        <div class="salary__period" data-i18n="sal.j">0–6 месяцев</div>
+        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$400–700</b></div>
+        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$700–1300</b></div>
+      </article>
+      <article class="salary__card salary__card--mid liquid-glass reveal reveal-d1">
+        <div class="salary__lvl">Middle</div>
+        <div class="salary__period" data-i18n="sal.m">6–18 месяцев</div>
+        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$900–1600</b></div>
+        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$1800–3000</b></div>
+      </article>
+      <article class="salary__card salary__card--sr reveal reveal-d2">
+        <div class="salary__lvl">Senior</div>
+        <div class="salary__period" data-i18n="sal.s">1.5+ лет</div>
+        <div class="salary__row"><span data-i18n="sal.uz">В Узбекистане</span><b>$1800–3500+</b></div>
+        <div class="salary__row"><span data-i18n="sal.rem">Удалёнка / зарубеж</span><b>$3500–7000+</b></div>
+      </article>
+    </div>
+    <p class="salary__note reveal" data-i18n="sal.note">Визуализаторы и BIM-специалисты на удалёнке зарабатывают в валюте — рынок глобальный.</p>
+    <a href="#cta" class="btn btn--primary btn--lg btn--center"><span data-i18n="sal.cta">Хочу так же — записаться</span> <span class="arrow"></span></a>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="quiz" id="quiz" data-viewcontent="quiz">
+  <div class="container">
+    <div class="quiz__head reveal">
+      <h2 class="display sm" data-i18n="quiz.title">Подходит ли вам архитектура?</h2>
+      <p class="quiz__lead" data-i18n="quiz.lead">5 коротких вопросов · 30 секунд · персональный вердикт от ментора</p>
+    </div>
+
+    <div class="quiz__box liquid-glass reveal" id="quizBox">
+      <div class="quiz__progress"><div class="quiz__bar" id="quizBar"></div></div>
+      <div class="quiz__counter"><span id="quizStep">1</span>/5</div>
+
+      <div class="quiz__step is-active" data-step="1">
+        <h3 class="quiz__q" data-i18n="q1.t">Замечаете ли вы архитектуру вокруг — красивые фасады, необычные дома, детали зданий?</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" data-score="1" data-i18n="q1.a1">Да, постоянно</button>
+          <button class="quiz__opt" data-score="1" data-i18n="q1.a2">Иногда</button>
+          <button class="quiz__opt" data-score="0" data-i18n="q1.a3">Не обращаю внимания</button>
+        </div>
+      </div>
+
+      <div class="quiz__step" data-step="2">
+        <h3 class="quiz__q" data-i18n="q2.t">Что вас больше привлекает в профессии?</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" data-score="1" data-i18n="q2.a1">Создавать то, что построят</button>
+          <button class="quiz__opt" data-score="1" data-i18n="q2.a2">Стабильный доход</button>
+          <button class="quiz__opt" data-score="1" data-i18n="q2.a3">Работа удалённо</button>
+          <button class="quiz__opt" data-score="1" data-i18n="q2.a4">Всё вместе</button>
+        </div>
+      </div>
+
+      <div class="quiz__step" data-step="3">
+        <h3 class="quiz__q" data-i18n="q3.t">Сколько времени готовы уделять обучению?</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" data-score="1" data-i18n="q3.a1">1–2 часа в день</button>
+          <button class="quiz__opt" data-score="1" data-i18n="q3.a2">3–4 часа в день</button>
+          <button class="quiz__opt" data-score="0" data-i18n="q3.a3">Только по выходным</button>
+        </div>
+      </div>
+
+      <div class="quiz__step" data-step="4">
+        <h3 class="quiz__q" data-i18n="q4.t">Какой результат хотите получить через 6 месяцев?</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" data-score="1" data-i18n="q4.a1">Первый заказ и доход</button>
+          <button class="quiz__opt" data-score="1" data-i18n="q4.a2">Новая профессия и портфолио</button>
+          <button class="quiz__opt" data-score="0" data-i18n="q4.a3">Просто разобраться, моё ли это</button>
+        </div>
+      </div>
+
+      <div class="quiz__step" data-step="5">
+        <h3 class="quiz__q" data-i18n="q5.t">В каком городе вы находитесь?</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" data-score="1" data-city="tsh" data-i18n="q5.a1">Ташкент</button>
+          <button class="quiz__opt" data-score="1" data-city="smr" data-i18n="q5.a2">Самарканд</button>
+          <button class="quiz__opt" data-score="1" data-city="frg" data-i18n="q5.a3">Фергана</button>
+          <button class="quiz__opt" data-score="0" data-i18n="q5.a4">Другой город</button>
+        </div>
+      </div>
+
+      <div class="quiz__step quiz__final" data-step="final">
+        <div class="quiz__verdict" id="quizVerdict"></div>
+        <form class="quiz__form" id="quizForm">
+          <label><span data-i18n="form.name">Имя</span><input type="text" name="name" required placeholder="Aziz" /></label>
+          <label><span data-i18n="form.phone">Телефон</span>
+            <span class="phone-field">
+              <span class="phone-field__prefix">+998</span>
+              <input type="tel" name="phone" required inputmode="tel" autocomplete="tel-national" placeholder="90 123 45 67" maxlength="12" />
+            </span>
+            <span class="phone-error" data-i18n="form.phoneError">Введите номер полностью — 9 цифр после +998</span>
+          </label>
+          <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="utm_content" /><input type="hidden" name="utm_term" />
+          <button type="submit" class="btn btn--primary btn--lg btn--block"><span data-i18n="form.submit">Записаться на урок</span> <span class="arrow"></span></button>
+        </form>
+        <button class="quiz__back" id="quizRestart" data-i18n="quiz.restart">← Пройти заново</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY INTERNO ===== -->
+<section class="why">
+  <div class="container">
+    <h2 class="display sm reveal" data-i18n="why.title">Почему именно INTERNO</h2>
+    <div class="why__grid">
+      <div class="why__card liquid-glass reveal">
+        <div class="why__num"><em data-counter="8">0</em></div>
+        <div class="why__lbl" data-i18n="why.l1">лет на рынке · с 2018 года</div>
+      </div>
+      <div class="why__card why__card--accent reveal reveal-d1">
+        <div class="why__num"><em data-counter="2400">0</em>+</div>
+        <div class="why__lbl" data-i18n="why.l2">выпускников — крупнейшая школа дизайна в Узбекистане</div>
+      </div>
+      <div class="why__card liquid-glass reveal reveal-d2">
+        <div class="why__num"><em data-counter="60">0</em>%</div>
+        <div class="why__lbl" data-i18n="why.l3">выпускников работают в профессии — проверяем по соцсетям</div>
+      </div>
+      <div class="why__card liquid-glass reveal reveal-d3">
+        <div class="why__num"><em data-counter="3">0</em></div>
+        <div class="why__lbl" data-i18n="why.l4">города — Ташкент, Самарканд, Фергана</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="container">
+    <h2 class="display sm reveal" data-i18n="faq.title">Частые вопросы</h2>
+    <div class="faq__list">
+      <details class="faq__item liquid-glass" open>
+        <summary data-i18n="faq.q1">Урок реально бесплатный? Будете продавать курс?</summary>
+        <p data-i18n="faq.a1">Да, бесплатно. Продавать никто не будет — но если зацепит, расскажем как поступить на основной курс.</p>
+      </details>
+      <details class="faq__item liquid-glass">
+        <summary data-i18n="faq.q2">Я никогда не чертил и не проектировал. Справлюсь?</summary>
+        <p data-i18n="faq.a2">Урок построен с нуля. Спикер показывает каждый шаг — вы просто повторяете и задаёте вопросы.</p>
+      </details>
+      <details class="faq__item liquid-glass">
+        <summary data-i18n="faq.q3">Нужен ли мощный ноутбук?</summary>
+        <p data-i18n="faq.a3">Для урока хватит любого ноутбука последних лет. Если ноутбука нет — обеспечим компьютер на месте.</p>
+      </details>
+      <details class="faq__item liquid-glass">
+        <summary data-i18n="faq.q4">Я живу в Самарканде/Фергане. Как мне попасть?</summary>
+        <p data-i18n="faq.a4">Открытые уроки проводятся во всех 3 городах. Адрес в вашем городе пришлём при записи.</p>
+      </details>
+      <details class="faq__item liquid-glass">
+        <summary data-i18n="faq.q5">Сколько длится основной курс?</summary>
+        <p data-i18n="faq.a5">6 месяцев. 2 раза в неделю по 2 часа. Плюс практика на реальных объектах.</p>
+      </details>
+      <details class="faq__item liquid-glass">
+        <summary data-i18n="faq.q6">Дадите ли диплом?</summary>
+        <p data-i18n="faq.a6">Да, выдаём сертификат с QR-кодом, который проверяется на нашем сайте.</p>
+      </details>
+      <details class="faq__item liquid-glass">
+        <summary data-i18n="faq.q7">Что если я запишусь и не приду?</summary>
+        <p data-i18n="faq.a7">Просто напишите нам — перенесём на следующий урок. Без проблем.</p>
+      </details>
+      <details class="faq__item liquid-glass">
+        <summary data-i18n="faq.q8">Чем архитектура отличается от дизайна интерьера?</summary>
+        <p data-i18n="faq.a8">Архитектор проектирует само здание: планировки, фасады, конструкции. Дизайнер работает с пространством внутри. На уроке разберём обе профессии — поймёте, что ближе вам.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL FORM ===== -->
+<section class="cta" id="cta" data-viewcontent="cta-form">
+  <div class="container">
+    <div class="cta__inner liquid-glass reveal">
+      <div class="cta__left">
+        <h2 class="display sm" data-i18n="cta.title">Места на ближайший урок заканчиваются</h2>
+        <div class="countdown" id="countdown">
+          <div class="countdown__cell liquid-glass"><span id="cdDays">00</span><small data-i18n="cd.d">дней</small></div>
+          <div class="countdown__cell liquid-glass"><span id="cdHours">00</span><small data-i18n="cd.h">часов</small></div>
+          <div class="countdown__cell liquid-glass"><span id="cdMin">00</span><small data-i18n="cd.m">мин</small></div>
+          <div class="countdown__cell liquid-glass"><span id="cdSec">00</span><small data-i18n="cd.s">сек</small></div>
+        </div>
+
+        <div class="progress">
+          <div class="progress__bar"><div class="progress__fill" style="width:72%"></div></div>
+          <div class="progress__lbl"><b data-seats-taken>14</b> <span data-i18n="prog.of">из</span> <b data-seats-total>20</b> <span data-i18n="prog.spots">мест занято</span></div>
+        </div>
+
+        <ul class="cta__bullets">
+          <li data-i18n="cta.b1">✓ 1 час практики в ArchiCAD + Q&A</li>
+          <li data-i18n="cta.b2">✓ PDF-гайд + чек-лист в подарок</li>
+          <li data-i18n="cta.b3">✓ Скидка 20% на основной курс</li>
+        </ul>
+      </div>
+
+      <form class="cta__form" id="form">
+        <p class="lesson-next lesson-next--form" data-lesson-line></p>
+        <label><span data-i18n="form.name">Имя</span><input type="text" name="name" required placeholder="Aziz" /></label>
+        <label><span data-i18n="form.phone">Телефон</span>
+          <span class="phone-field">
+            <span class="phone-field__prefix">+998</span>
+            <input type="tel" name="phone" required inputmode="tel" autocomplete="tel-national" placeholder="90 123 45 67" maxlength="12" />
+          </span>
+          <span class="phone-error" data-i18n="form.phoneError">Введите номер полностью — 9 цифр после +998</span>
+        </label>
+        <label><span data-i18n="form.city">Город</span>
+          <select name="city">
+            <option value="tsh">Ташкент</option>
+            <option value="smr">Самарканд</option>
+            <option value="frg">Фергана</option>
+          </select>
+        </label>
+        <label><span data-i18n="form.lang">Язык</span>
+          <select name="lang">
+            <option value="ru" data-i18n="form.opt1">Русский</option>
+            <option value="uz" data-i18n="form.opt2">Узбекский</option>
+          </select>
+        </label>
+        <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="utm_content" /><input type="hidden" name="utm_term" />
+        <label class="cta__check">
+          <input type="checkbox" required />
+          <span data-i18n="form.consent">Согласен на обработку персональных данных</span>
+        </label>
+        <button type="submit" class="btn btn--primary btn--lg btn--block"><span data-i18n="form.submit">Записаться на урок</span> <span class="arrow"></span></button>
+        <p class="cta__small" data-i18n="form.policy">Звоним только для подтверждения. Не спамим. Можно отписаться в любой момент.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="logo" href="#">
+          <img src="logo-ru.svg" alt="INTERNO School" class="logo__img logo__img--ru" />
+          <img src="logo-uz.svg" alt="INTERNO School" class="logo__img logo__img--uz" />
+        </a>
+        <p class="muted small" data-i18n="ftr.about">Школа дизайна и архитектуры №1 в Узбекистане. С 2018 года.</p>
+      </div>
+      <div class="footer__col">
+        <h4 data-i18n="ftr.contact">Контакты</h4>
+        <a href="tel:+998781131808">+998 78 113 18 08</a>
+        <a href="mailto:hello@interno.school">hello@interno.school</a>
+      </div>
+      <div class="footer__col">
+        <h4 data-i18n="ftr.cities">Адреса</h4>
+        <p data-addr="tsh" data-i18n="ftr.addr.tsh">Ташкент · Мирзо-Улугбекский р-н, ул. Хирмонтепа, 34Б (м. Буюк Ипак Йули)</p>
+        <p data-addr="smr" data-i18n="ftr.addr.smr">Самарканд · ул. Давлатабад</p>
+        <p data-addr="frg" data-i18n="ftr.addr.frg">Фергана · ул. Комус, 40</p>
+      </div>
+      <div class="footer__col">
+        <h4 data-i18n="ftr.social">Соцсети</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Telegram</a>
+        <a href="#">YouTube</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 INTERNO School</span>
+      <a href="#" data-i18n="ftr.privacy">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== STICKY MOBILE CTA ===== -->
+<button type="button" class="sticky-cta" id="stickyCta">
+  <span data-i18n="sticky.text">Записаться бесплатно</span>
+  <span class="arrow"></span>
+</button>
+
+<!-- ===== SIGNUP MODAL ===== -->
+<div class="modal" id="signupModal" aria-hidden="true">
+  <div class="modal__backdrop" data-modal-close></div>
+  <div class="modal__panel liquid-glass" role="dialog" aria-labelledby="modalTitle">
+    <button type="button" class="modal__close" data-modal-close aria-label="Close">×</button>
+    <div class="modal__head">
+      <div class="modal__eyebrow" data-i18n="modal.eyebrow">Бесплатный открытый урок</div>
+      <h2 class="modal__title" id="modalTitle" data-i18n="modal.title">Запишитесь на ближайший урок</h2>
+      <p class="modal__lead" data-i18n="modal.lead">Менеджер свяжется с вами в течение 15 минут — подтвердит место, дату и время.</p>
+      <p class="lesson-next lesson-next--modal" data-lesson-line></p>
+    </div>
+
+    <ul class="modal__bullets">
+      <li data-i18n="modal.b1">✓ 1 час практики в ArchiCAD + Q&A</li>
+      <li data-i18n="modal.b2">✓ PDF-гайд + чек-лист в подарок</li>
+      <li data-i18n="modal.b3">✓ Скидка 20% на основной курс</li>
+    </ul>
+
+    <form class="modal__form" id="modalForm">
+      <label><span data-i18n="form.name">Имя</span><input type="text" name="name" required placeholder="Aziz" /></label>
+      <label><span data-i18n="form.phone">Телефон</span>
+        <span class="phone-field">
+          <span class="phone-field__prefix">+998</span>
+          <input type="tel" name="phone" required inputmode="tel" autocomplete="tel-national" placeholder="90 123 45 67" maxlength="12" />
+        </span>
+        <span class="phone-error" data-i18n="form.phoneError">Введите номер полностью — 9 цифр после +998</span>
+      </label>
+      <label><span data-i18n="form.city">Город</span>
+        <select name="city">
+          <option value="tsh">Ташкент</option>
+          <option value="smr">Самарканд</option>
+          <option value="frg">Фергана</option>
+        </select>
+      </label>
+      <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="utm_content" /><input type="hidden" name="utm_term" />
+      <label class="modal__check">
+        <input type="checkbox" required />
+        <span data-i18n="form.consent">Согласен на обработку персональных данных</span>
+      </label>
+      <button type="submit" class="btn btn--primary btn--lg btn--block">
+        <span data-i18n="form.submit">Записаться на урок</span>
+        <span class="arrow"></span>
+      </button>
+      <p class="modal__small" data-i18n="form.policy">Звоним только для подтверждения. Не спамим.</p>
+    </form>
+  </div>
+</div>
+
+<!-- Second synchronous i18n pass: localize everything below the hero that has
+     been parsed by now, without waiting for script.js to download. -->
+<script>applyLang(document.documentElement.lang);</script>
+<script src="script.js"></script>
+</body>
+</html>
