@@ -25,8 +25,8 @@ declare -A FILES=(
   [icon-money.png]="hf_20260815_093932_e2bc1df0-63a5-4faf-a777-b751e7552dcf_min.png"
   [icon-stopwatch.png]="hf_20260815_093953_48178871-c01d-40af-8efe-c0a1cf8d9b3b_min.png"
   # mentor
-  [mentor-timur.webp]="hf_20260815_093952_710aebe9-143f-4fe1-adcf-355e7f68822b_min.webp"
-  [mentor-timur-full.png]="hf_20260815_093952_710aebe9-143f-4fe1-adcf-355e7f68822b.png"
+  [mentor-vladislav.webp]="hf_20260815_135305_795ec63d-33e5-4c8c-9c3e-2e12d44593a7_min.webp"
+  [mentor-vladislav-full.png]="hf_20260815_135305_795ec63d-33e5-4c8c-9c3e-2e12d44593a7.png"
   # works gallery
   [work-1-house.webp]="hf_20260815_093759_90b6e5d0-82c4-4515-aba5-6a73660d9078_min.webp"
   [work-2-courtyard.webp]="hf_20260815_093759_e5444695-d5d2-467d-946f-d634d3c562e9_min.webp"
