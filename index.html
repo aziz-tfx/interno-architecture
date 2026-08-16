@@ -207,7 +207,9 @@ const dict = {
     "faq.q7":"Что если я запишусь и не приду?","faq.a7":"Просто напишите нам — перенесём на следующий урок. Без проблем.",
     "faq.q8":"Чем архитектура отличается от дизайна интерьера?","faq.a8":"Архитектор проектирует само здание: планировки, фасады, конструкции. Дизайнер работает с пространством внутри. На уроке разберём обе профессии — поймёте, что ближе вам.",
 
-    "cta.title":"Места на ближайший урок заканчиваются",
+    "cta.title":"Места на урок в <span class=\"city-loc\">Ташкенте</span> заканчиваются",
+    "form.next":"Продолжить",
+    "msg.or":"Не любите формы? Запишитесь в мессенджере:",
     "cd.d":"дней","cd.h":"часов","cd.m":"мин","cd.s":"сек",
     "prog.of":"из","prog.spots":"мест занято",
     "cta.b1":"✓ 1 час практики в Revit + Q&A","cta.b2":"✓ PDF-гайд + чек-лист в подарок","cta.b3":"✓ Скидка 20% на основной курс",
@@ -383,7 +385,9 @@ const dict = {
     "faq.q7":"Yozilib, kela olmasam-chi?","faq.a7":"Shunchaki bizga yozing — keyingi darsga ko‘chiramiz. Hech qanday muammosiz.",
     "faq.q8":"Arxitektura interyer dizaynidan nimasi bilan farq qiladi?","faq.a8":"Arxitektor binoning o‘zini loyihalaydi: rejalar, fasadlar, konstruksiyalar. Dizayner ichki makon bilan ishlaydi. Darsda ikkala kasbni tahlil qilamiz — qaysi biri yaqinligini tushunasiz.",
 
-    "cta.title":"Eng yaqin darsga joylar tugayapti",
+    "cta.title":"<span class=\"city-loc\">Toshkentdagi</span> darsga joylar tugayapti",
+    "form.next":"Davom etish",
+    "msg.or":"Formalar yoqmaydimi? Messenjerda yoziling:",
     "cd.d":"kun","cd.h":"soat","cd.m":"daq","cd.s":"son",
     "prog.of":"/","prog.spots":"joy band",
     "cta.b1":"✓ 1 soat Revit amaliyoti + Q&A","cta.b2":"✓ Sovg‘aga PDF qo‘llanma + chek-list","cta.b3":"✓ Asosiy kursga 20% chegirma",
@@ -413,6 +417,11 @@ const dict = {
 const cityNames = {
   ru: {tsh:"Ташкент",smr:"Самарканд",frg:"Фергана"},
   uz: {tsh:"Toshkent",smr:"Samarqand",frg:"Farg‘ona"},
+};
+// Локативные формы для заголовка CTA: «в Ташкенте» / «Toshkentdagi»
+const cityLoc = {
+  ru: {tsh:"Ташкенте",smr:"Самарканде",frg:"Фергане"},
+  uz: {tsh:"Toshkentdagi",smr:"Samarqanddagi",frg:"Farg‘onadagi"},
 };
 
 // Resolve lang + city synchronously: URL → localStorage → navigator.language → uz.
@@ -491,6 +500,10 @@ function applyLang(lang){
   });
   document.querySelectorAll('.city-name').forEach(el=>{
     el.textContent = cityNames[lang][city] || cityNames[lang].tsh;
+  });
+  // Заголовок CTA персонализируется под выбранный город (после innerHTML выше)
+  document.querySelectorAll('.city-loc').forEach(el=>{
+    el.textContent = cityLoc[lang][city] || cityLoc[lang].tsh;
   });
   const sel = document.getElementById('citySelect');
   if(sel){
@@ -1148,7 +1161,7 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
   <div class="container">
     <div class="cta__inner liquid-glass reveal">
       <div class="cta__left">
-        <h2 class="display sm" data-i18n="cta.title">Места на ближайший урок заканчиваются</h2>
+        <h2 class="display sm" data-i18n="cta.title">Места на урок в <span class="city-loc">Ташкенте</span> заканчиваются</h2>
         <div class="countdown" id="countdown">
           <div class="countdown__cell liquid-glass"><span id="cdDays">00</span><small data-i18n="cd.d">дней</small></div>
           <div class="countdown__cell liquid-glass"><span id="cdHours">00</span><small data-i18n="cd.h">часов</small></div>
@@ -1168,9 +1181,11 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
         </ul>
       </div>
 
+      <!-- Двухшаговая форма: шаг 1 — только телефон (минимум трения),
+           шаг 2 раскрывается после валидного номера. Частичная заявка
+           (только телефон) сразу уходит в Telegram-уведомление. -->
       <form class="cta__form" id="form">
         <p class="lesson-next lesson-next--form" data-lesson-line></p>
-        <label><span data-i18n="form.name">Имя</span><input type="text" name="name" required placeholder="Aziz" /></label>
         <label><span data-i18n="form.phone">Телефон</span>
           <span class="phone-field">
             <span class="phone-field__prefix">+998</span>
@@ -1178,26 +1193,45 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
           </span>
           <span class="phone-error" data-i18n="form.phoneError">Введите номер полностью — 9 цифр после +998</span>
         </label>
-        <label><span data-i18n="form.city">Город</span>
-          <select name="city">
-            <option value="tsh">Ташкент</option>
-            <option value="smr">Самарканд</option>
-            <option value="frg">Фергана</option>
-          </select>
-        </label>
-        <label><span data-i18n="form.lang">Язык</span>
-          <select name="lang">
-            <option value="ru" data-i18n="form.opt1">Русский</option>
-            <option value="uz" data-i18n="form.opt2">Узбекский</option>
-          </select>
-        </label>
+        <button type="button" class="btn btn--primary btn--lg btn--block form-next" data-form-next>
+          <span data-i18n="form.next">Продолжить</span> <span class="arrow"></span>
+        </button>
+        <div class="form-step2">
+          <label><span data-i18n="form.name">Имя</span><input type="text" name="name" required placeholder="Aziz" /></label>
+          <label><span data-i18n="form.city">Город</span>
+            <select name="city">
+              <option value="tsh">Ташкент</option>
+              <option value="smr">Самарканд</option>
+              <option value="frg">Фергана</option>
+            </select>
+          </label>
+          <label><span data-i18n="form.lang">Язык</span>
+            <select name="lang">
+              <option value="ru" data-i18n="form.opt1">Русский</option>
+              <option value="uz" data-i18n="form.opt2">Узбекский</option>
+            </select>
+          </label>
+          <label class="cta__check">
+            <input type="checkbox" required />
+            <span data-i18n="form.consent">Согласен на обработку персональных данных</span>
+          </label>
+          <button type="submit" class="btn btn--primary btn--lg btn--block"><span data-i18n="form.submit">Записаться на урок</span> <span class="arrow"></span></button>
+        </div>
         <input type="hidden" name="utm_source" /><input type="hidden" name="utm_medium" /><input type="hidden" name="utm_campaign" /><input type="hidden" name="utm_content" /><input type="hidden" name="utm_term" />
-        <label class="cta__check">
-          <input type="checkbox" required />
-          <span data-i18n="form.consent">Согласен на обработку персональных данных</span>
-        </label>
-        <button type="submit" class="btn btn--primary btn--lg btn--block"><span data-i18n="form.submit">Записаться на урок</span> <span class="arrow"></span></button>
         <p class="cta__small" data-i18n="form.policy">Звоним только для подтверждения. Не спамим. Можно отписаться в любой момент.</p>
+        <div class="msg-alt">
+          <span class="msg-alt__lbl" data-i18n="msg.or">Не любите формы? Запишитесь в мессенджере:</span>
+          <div class="msg-alt__btns">
+            <a class="msg-btn msg-btn--tg" href="https://t.me/internoschool" target="_blank" rel="noopener" data-msg="telegram">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+              Telegram
+            </a>
+            <a class="msg-btn msg-btn--wa" href="https://wa.me/998781131808" target="_blank" rel="noopener" data-msg="whatsapp" data-wa>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.7.8-.8 1-.1.2-.3.2-.6.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.1-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -1290,6 +1324,19 @@ src="https://www.facebook.com/tr?id=4251277901808457&ev=PageView&noscript=1"
         <span class="arrow"></span>
       </button>
       <p class="modal__small" data-i18n="form.policy">Звоним только для подтверждения. Не спамим.</p>
+      <div class="msg-alt msg-alt--modal">
+        <span class="msg-alt__lbl" data-i18n="msg.or">Не любите формы? Запишитесь в мессенджере:</span>
+        <div class="msg-alt__btns">
+          <a class="msg-btn msg-btn--tg" href="https://t.me/internoschool" target="_blank" rel="noopener" data-msg="telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+            Telegram
+          </a>
+          <a class="msg-btn msg-btn--wa" href="https://wa.me/998781131808" target="_blank" rel="noopener" data-msg="whatsapp" data-wa>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.7.8-.8 1-.1.2-.3.2-.6.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.1-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
     </form>
   </div>
 </div>

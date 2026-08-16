@@ -755,6 +755,34 @@ section{position:relative}
 .cta__check input{margin-top:2px;width:auto;padding:0;background:transparent}
 .cta__small{font-size:11px;color:#666;text-align:center}
 
+/* ===== TWO-STEP FORM =====
+   Шаг 2 (имя, город, язык, согласие, submit) раскрывается после
+   валидного телефона; display:contents сохраняет flex-gap родителя. */
+.form-step2{display:none}
+.form-step2.is-open{display:contents}
+form.step2-open .form-next{display:none}
+
+/* ===== MESSENGER ALT (Telegram / WhatsApp) ===== */
+.msg-alt{
+  margin-top:6px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.12);
+  display:flex;flex-direction:column;gap:10px;
+}
+.msg-alt__lbl{font-size:12px;color:#888;text-align:center}
+.msg-alt__btns{display:flex;gap:8px}
+.msg-btn{
+  flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 16px;border-radius:999px;
+  font-weight:600;font-size:13px;
+  background:transparent;border:1.5px solid var(--line);color:var(--paper);
+  transition:background .2s,border-color .2s,color .2s,transform .2s;
+}
+.msg-btn svg{flex-shrink:0}
+.msg-btn--tg:hover{background:#229ED9;border-color:#229ED9;color:#fff;transform:translateY(-1px)}
+.msg-btn--wa:hover{background:#25D366;border-color:#25D366;color:#0b3d24;transform:translateY(-1px)}
+.msg-btn--tg svg{color:#229ED9}
+.msg-btn--wa svg{color:#25D366}
+.msg-btn:hover svg{color:currentColor}
+
 /* ===== FOOTER ===== */
 .footer{padding:48px 0 24px;border-top:1px solid var(--line)}
 .footer .container{max-width:1280px}

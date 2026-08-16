@@ -331,16 +331,17 @@ async function sendToAmo(form){
 
 // Send the same lead to our Telegram notifier (Vercel serverless function).
 // Runs in parallel with amoCRM — failure here must not break the user flow.
-async function sendToTelegram(form){
+// opts.partial: true — «частичная заявка» (только телефон, шаг 1 формы).
+async function sendToTelegram(form, opts){
   const meta = detectLeadMeta(form);
   const name = form.elements.name?.value?.trim() || '';
   const phone = '+998' + phoneDigits(form);
   const payload = {
     name, phone,
-    course: COURSE_LABEL,
+    course: COURSE_LABEL + (opts?.partial ? ' · ⏳ неполная (только телефон)' : ''),
     city: meta.cityLabel,
     lang: meta.langLabel,
-    source: form.id || 'form',
+    source: (form.id || 'form') + (opts?.partial ? '_step1' : ''),
     url: location.href,
     referrer: document.referrer || '',
     utm: getUtm(),
@@ -391,6 +392,42 @@ function fireLeadAnalytics(form, meta, eventId){
   }, utm));
 }
 
+// ===== TWO-STEP FORM (#form): телефон → остальные поля =====
+// Валидный номер раскрывает шаг 2 и сразу шлёт «частичную заявку» в
+// Telegram-уведомление — лид не теряется, даже если человек бросил форму.
+(function(){
+  const form = document.getElementById('form');
+  const nextBtn = form?.querySelector('[data-form-next]');
+  const step2 = form?.querySelector('.form-step2');
+  if(!form || !nextBtn || !step2) return;
+  let partialSent = false;
+  nextBtn.addEventListener('click', ()=>{
+    const digits = phoneDigits(form);
+    if(digits.length !== 9){
+      const phoneInput = form.elements.phone;
+      phoneInput?.closest('label')?.classList.add('has-error');
+      phoneInput?.focus();
+      return;
+    }
+    step2.classList.add('is-open');
+    form.classList.add('step2-open');
+    setTimeout(()=>form.elements.name?.focus(), 50);
+    if(window.fbq) window.fbq('trackCustom','LeadStep1', { form: form.id });
+    if(!partialSent){
+      partialSent = true;
+      sendToTelegram(form, { partial: true });
+    }
+  });
+  // Enter в поле телефона на шаге 1 — то же, что кнопка «Продолжить»
+  // (иначе implicit submission упрётся в скрытые required-поля шага 2).
+  form.elements.phone?.addEventListener('keydown', e=>{
+    if(e.key === 'Enter' && !form.classList.contains('step2-open')){
+      e.preventDefault();
+      nextBtn.click();
+    }
+  });
+})();
+
 function handleForm(form){
   form?.addEventListener('submit', async e => {
     e.preventDefault();
@@ -417,6 +454,26 @@ function handleForm(form){
 handleForm(document.getElementById('form'));
 handleForm(document.getElementById('quizForm'));
 handleForm(document.getElementById('modalForm'));
+
+// ===== MESSENGER BUTTONS (Telegram / WhatsApp) =====
+// WhatsApp-ссылка собирается в момент клика: подставляем язык и выбранный
+// город в предзаполненный текст. Клик трекается как Contact в Meta Pixel.
+const WA_PHONE = '998781131808';
+const WA_TEXT = {
+  ru: city => `Здравствуйте! Хочу записаться на бесплатный открытый урок по архитектуре (город: ${city}).`,
+  uz: city => `Assalomu alaykum! Arxitektura bo‘yicha bepul ochiq darsga yozilmoqchiman (shahar: ${city}).`,
+};
+document.querySelectorAll('[data-msg]').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    const lang = document.documentElement.lang === 'uz' ? 'uz' : 'ru';
+    if(a.hasAttribute('data-wa')){
+      const cityCode = document.documentElement.getAttribute('data-city') || 'tsh';
+      const city = (CITY_LABEL[cityCode] || 'Ташкент');
+      a.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(WA_TEXT[lang](city))}`;
+    }
+    if(window.fbq) window.fbq('track','Contact', { method: a.dataset.msg, course: 'architecture' });
+  });
+});
 
 // ===== MODAL =====
 const modal = document.getElementById('signupModal');
