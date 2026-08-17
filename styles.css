@@ -480,6 +480,17 @@ section{position:relative}
   box-shadow:inset 0 1px 1px var(--glass-shadow-inset),0 18px 44px rgba(0,0,0,.5),0 0 44px rgba(247,107,43,.09);
 }
 .bento__card--lg{grid-column:span 2;grid-row:span 2;padding:36px 32px}
+/* Медиа-карточка: сцена Revit заполняет верх и растворяется в фоне карточки */
+.bento__card--media{min-height:460px}
+.bento__media{
+  position:absolute;left:0;right:0;top:0;height:68%;
+  z-index:1;pointer-events:none;
+}
+.bento__media img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);
+}
 .bento__num{
   position:absolute;top:22px;right:26px;
   font-family:'Unbounded';font-weight:700;font-size:13px;color:rgba(255,255,255,.22);
@@ -982,6 +993,8 @@ label.has-error .phone-error{display:block}
   .bento__card,.bento__card--lg{grid-column:span 1;grid-row:span 1;padding:24px 22px;border-radius:20px}
   .bento__icon{width:72px;height:72px}
   .bento__icon--lg{width:120px;height:120px}
+  .bento__card--media{min-height:340px}
+  .bento__media{height:58%}
   .bento__title,.bento__card--lg .bento__title{font-size:17px}
 
   .gift{padding:24px 22px;border-radius:20px}
