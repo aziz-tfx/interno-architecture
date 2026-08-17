@@ -247,12 +247,12 @@ function phoneDigits(form){
 }
 
 // ===== FORMS =====
-// Единая форма amoCRM школы; курс размечаем тегами и заметкой, чтобы
-// триггеры в amo могли отделить поток «Архитектура» от других лендингов.
+// Отдельная amoCRM-форма курса «Архитектура» (id 1738598). ID полей
+// сняты с рендера формы; курс дополнительно размечаем тегами и заметкой.
 const AMOCRM_FORM = {
   endpoint: 'https://forms.amocrm.ru/queue/add',
-  form_id: '1705506',
-  hash: '37df3dcc789078355483c5cbdb3fe57b',
+  form_id: '1738598',
+  hash: 'f15861c63fe6b612453c4e438cca0e1f',
   fields: {
     name: 'fields[name_1]',
     phone: 'fields[875427_1][1182433]',
