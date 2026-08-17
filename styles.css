@@ -442,6 +442,14 @@ section{position:relative}
   font-family:'Unbounded';font-weight:700;font-size:14px;
   color:rgba(255,255,255,.22);letter-spacing:.02em;
 }
+.fear__ico{
+  width:116px;height:116px;object-fit:contain;align-self:flex-start;
+  margin:-4px 0 -2px;
+  filter:drop-shadow(0 12px 24px rgba(0,0,0,.5));
+  animation:secFloat 4.2s ease-in-out infinite alternate;
+}
+.fear__card:nth-child(2) .fear__ico{animation-delay:-1.4s}
+.fear__card:nth-child(3) .fear__ico{animation-delay:-2.8s}
 .fear__bad{
   display:flex;gap:12px;align-items:flex-start;
   font-size:15px;color:#b9b9b9;line-height:1.45;font-weight:500;
@@ -657,7 +665,15 @@ section{position:relative}
 /* ===== SALARY ===== */
 .salary{padding:72px 0}
 .salary__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px 0 8px}
-.salary__card{border-radius:24px;padding:32px 28px;display:flex;flex-direction:column;gap:14px}
+.salary__card{position:relative;border-radius:24px;padding:32px 28px;display:flex;flex-direction:column;gap:14px}
+.salary__ico{
+  position:absolute;top:14px;right:16px;
+  width:104px;height:104px;object-fit:contain;
+  filter:drop-shadow(0 10px 20px rgba(0,0,0,.45));
+  animation:secFloat 4.5s ease-in-out infinite alternate;
+}
+.salary__card--mid .salary__ico{animation-delay:-1.5s}
+.salary__card--sr .salary__ico{animation-delay:-3s}
 .salary__lvl{font-family:'Unbounded';font-weight:700;font-size:24px;color:var(--paper);letter-spacing:-.015em}
 .salary__card--mid .salary__lvl{color:var(--orange)}
 .salary__card--sr{background:var(--orange);color:var(--ink);border-radius:24px}
@@ -984,6 +1000,8 @@ label.has-error .phone-error{display:block}
   .fear__title{font-size:clamp(24px,6.6vw,34px)}
   .fear__card{padding:24px 22px 22px;border-radius:20px;gap:16px}
   .fear__num{top:18px;right:22px;font-size:12px}
+  .fear__ico{width:88px;height:88px}
+  .salary__ico{width:80px;height:80px;top:12px;right:12px}
   .fear__bad,.fear__good{font-size:14px;gap:10px}
   .fear__x,.fear__check{width:24px;height:24px}
   .fear__x{font-size:16px}
