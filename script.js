@@ -455,21 +455,16 @@ handleForm(document.getElementById('form'));
 handleForm(document.getElementById('quizForm'));
 handleForm(document.getElementById('modalForm'));
 
-// ===== MESSENGER BUTTONS (Telegram / WhatsApp) =====
-// WhatsApp-ссылка собирается в момент клика: подставляем язык и выбранный
-// город в предзаполненный текст. Клик трекается как Contact в Meta Pixel.
-const WA_PHONE = '998781131808';
-const WA_TEXT = {
-  ru: city => `Здравствуйте! Хочу записаться на бесплатный открытый урок по архитектуре (город: ${city}).`,
-  uz: city => `Assalomu alaykum! Arxitektura bo‘yicha bepul ochiq darsga yozilmoqchiman (shahar: ${city}).`,
-};
+// ===== MESSENGER BUTTON (Telegram-бот отдела продаж) =====
+// deep-link на @internosales_bot с параметром start: бот получает
+// /start arch_{город}_{язык} и понимает контекст лида без вопросов.
+// Клик трекается как Contact в Meta Pixel.
 document.querySelectorAll('[data-msg]').forEach(a=>{
   a.addEventListener('click', ()=>{
-    const lang = document.documentElement.lang === 'uz' ? 'uz' : 'ru';
-    if(a.hasAttribute('data-wa')){
-      const cityCode = document.documentElement.getAttribute('data-city') || 'tsh';
-      const city = (CITY_LABEL[cityCode] || 'Ташкент');
-      a.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(WA_TEXT[lang](city))}`;
+    if(a.hasAttribute('data-tg-start')){
+      const lang = document.documentElement.lang === 'uz' ? 'uz' : 'ru';
+      const city = document.documentElement.getAttribute('data-city') || 'tsh';
+      a.href = `https://t.me/internosales_bot?start=arch_${city}_${lang}`;
     }
     if(window.fbq) window.fbq('track','Contact', { method: a.dataset.msg, course: 'architecture' });
   });
