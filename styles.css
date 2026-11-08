@@ -813,7 +813,7 @@ form.step2-open .form-next{display:none}
 /* ===== FOOTER ===== */
 .footer{padding:48px 0 24px;border-top:1px solid var(--line)}
 .footer .container{max-width:1280px}
-.footer__top{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1fr;gap:32px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+.footer__top{display:grid;grid-template-columns:1.3fr .9fr 1.2fr 1fr 1fr;gap:32px;padding-bottom:32px;border-bottom:1px solid var(--line)}
 .footer__brand{display:flex;flex-direction:column;gap:12px}
 .footer .logo{height:52px}
 .footer__col{display:flex;flex-direction:column;gap:8px}

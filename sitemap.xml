@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://architecture.internoedu.uz/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://architecture.internoedu.uz/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://architecture.internoedu.uz/uz/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://architecture.internoedu.uz/"/>
+  </url>
+  <url>
+    <loc>https://architecture.internoedu.uz/uz/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://architecture.internoedu.uz/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://architecture.internoedu.uz/uz/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://architecture.internoedu.uz/"/>
+  </url>
+</urlset>
