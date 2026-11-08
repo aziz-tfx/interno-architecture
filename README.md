@@ -16,10 +16,20 @@ liquid-glass стекломорфизм), но в собственной «че�
 | `thanks.html` | Страница после заявки (CompleteRegistration + advanced matching) |
 | `api/notify.js` | Vercel serverless: уведомление о лиде в Telegram (env: `TG_BOT_TOKEN`, `TG_CHAT_ID`, опц. `TG_TOPIC_ID`) |
 | `assets/download.sh` | Скачивает все сгенерированные ассеты с CDN для self-host |
+| `uz/index.html` | Узбекская версия по отдельному URL `/uz/` — **генерируется**, вручную не править |
+| `scripts/build-seo.mjs` | SEO-сборка: `<head>` (title, canonical, hreflang, OG, JSON-LD), `uz/index.html`, `sitemap.xml`, `robots.txt`, `llms.txt` |
+| `vercel.json` | Редиректы `/index.html`, `noindex` для `*.vercel.app` и служебных файлов |
+
+## SEO
+
+Боевой домен — `https://architecture.internoedu.uz/` (RU) и `/uz/` (UZ). После любой правки
+текстов или словаря в `index.html` запустите `node scripts/build-seo.mjs` (Node 18+, без
+зависимостей) и закоммитьте изменённые файлы. Язык страницы задаёт URL (`?lang=` из рекламных
+ссылок по-прежнему переключает язык), переключатель RU/UZ — обычные ссылки с сохранением UTM.
 
 ## Контент-фичи
 
-- **RU/UZ локализация** — синхронно до первой отрисовки (`?lang=uz|ru`), город — `?city=tsh|smr|fer`.
+- **RU/UZ локализация** — `/` и `/uz/` (статичный HTML для поисковиков); `?lang=uz|ru` переключает синхронно до первой отрисовки, город — `?city=tsh|smr|fer`.
 - **Еженедельный цикл урока** — дата, каунтдаун и «осталось N мест» считаются от якорной даты (`LESSON_SCHEDULE` в `index.html`), страница не устаревает.
 - **Квиз из 5 вопросов** с вердиктом и мини-формой (лучший лид-магнит по опыту interno-open-lesson).
 - **Заявки**: amoCRM (единая форма школы, тег «Архитектура») + Telegram-уведомление + Meta Pixel `Lead`/`CompleteRegistration` с дедупликацией по eventID, UTM-сквозняк.

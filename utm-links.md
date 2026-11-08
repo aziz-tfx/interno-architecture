@@ -1,7 +1,9 @@
 # UTM-ссылки для запуска таргета · Открытый урок «Архитектура»
 
-База: `https://interno-architecture.vercel.app/`
-(после привязки домена замените на `https://architecture.interno.school/` — параметры те же)
+База: `https://architecture.internoedu.uz/` (боевой домен; `interno-architecture.vercel.app`
+закрыт от индексации заголовком `X-Robots-Tag: noindex`, но для рекламы тоже работает).
+Узбекская версия лежит по отдельному адресу `https://architecture.internoedu.uz/uz/`;
+`?lang=uz|ru` по-прежнему переключает язык на любом из адресов.
 
 Параметры лендинга:
 - `lang=ru|uz` — язык страницы применяется до первой отрисовки;
@@ -15,16 +17,16 @@
 ## Meta (Instagram / Facebook) · основной набор
 
 ### Ташкент
-- RU: `https://interno-architecture.vercel.app/?lang=ru&city=tsh&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_tsh_ru&utm_content={{ad.name}}`
-- UZ: `https://interno-architecture.vercel.app/?lang=uz&city=tsh&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_tsh_uz&utm_content={{ad.name}}`
+- RU: `https://architecture.internoedu.uz/?lang=ru&city=tsh&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_tsh_ru&utm_content={{ad.name}}`
+- UZ: `https://architecture.internoedu.uz/?lang=uz&city=tsh&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_tsh_uz&utm_content={{ad.name}}`
 
 ### Самарканд
-- RU: `https://interno-architecture.vercel.app/?lang=ru&city=smr&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_smr_ru&utm_content={{ad.name}}`
-- UZ: `https://interno-architecture.vercel.app/?lang=uz&city=smr&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_smr_uz&utm_content={{ad.name}}`
+- RU: `https://architecture.internoedu.uz/?lang=ru&city=smr&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_smr_ru&utm_content={{ad.name}}`
+- UZ: `https://architecture.internoedu.uz/?lang=uz&city=smr&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_smr_uz&utm_content={{ad.name}}`
 
 ### Фергана
-- RU: `https://interno-architecture.vercel.app/?lang=ru&city=frg&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_frg_ru&utm_content={{ad.name}}`
-- UZ: `https://interno-architecture.vercel.app/?lang=uz&city=frg&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_frg_uz&utm_content={{ad.name}}`
+- RU: `https://architecture.internoedu.uz/?lang=ru&city=frg&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_frg_ru&utm_content={{ad.name}}`
+- UZ: `https://architecture.internoedu.uz/?lang=uz&city=frg&utm_source=meta&utm_medium=cpc&utm_campaign=arch_ol_frg_uz&utm_content={{ad.name}}`
 
 `{{ad.name}}` — динамический макрос Meta: подставит название объявления,
 в отчётах будет видно, какой креатив привёл лид. Работают также
@@ -33,21 +35,21 @@
 
 ## Telegram Ads
 
-- RU: `https://interno-architecture.vercel.app/?lang=ru&city=tsh&utm_source=telegram&utm_medium=cpm&utm_campaign=arch_ol_tsh_ru`
-- UZ: `https://interno-architecture.vercel.app/?lang=uz&city=tsh&utm_source=telegram&utm_medium=cpm&utm_campaign=arch_ol_tsh_uz`
+- RU: `https://architecture.internoedu.uz/?lang=ru&city=tsh&utm_source=telegram&utm_medium=cpm&utm_campaign=arch_ol_tsh_ru`
+- UZ: `https://architecture.internoedu.uz/?lang=uz&city=tsh&utm_source=telegram&utm_medium=cpm&utm_campaign=arch_ol_tsh_uz`
 (для других городов меняйте `city=` и суффикс кампании)
 
 ## Блогеры / посевы
 
 Шаблон: `...?lang={lang}&city={city}&utm_source=influencer&utm_medium=post&utm_campaign=arch_ol_{город}_{язык}&utm_content={ник_блогера}`
 
-Пример: `https://interno-architecture.vercel.app/?lang=uz&city=tsh&utm_source=influencer&utm_medium=post&utm_campaign=arch_ol_tsh_uz&utm_content=arch_blogger_01`
+Пример: `https://architecture.internoedu.uz/?lang=uz&city=tsh&utm_source=influencer&utm_medium=post&utm_campaign=arch_ol_tsh_uz&utm_content=arch_blogger_01`
 
 ## Органика (сторис школы, шапка профиля, Telegram-канал)
 
-- Instagram bio: `https://interno-architecture.vercel.app/?utm_source=instagram&utm_medium=bio&utm_campaign=arch_ol_organic`
-- Сторис: `https://interno-architecture.vercel.app/?utm_source=instagram&utm_medium=stories&utm_campaign=arch_ol_organic`
-- Telegram-канал: `https://interno-architecture.vercel.app/?utm_source=telegram&utm_medium=channel&utm_campaign=arch_ol_organic`
+- Instagram bio: `https://architecture.internoedu.uz/?utm_source=instagram&utm_medium=bio&utm_campaign=arch_ol_organic`
+- Сторис: `https://architecture.internoedu.uz/?utm_source=instagram&utm_medium=stories&utm_campaign=arch_ol_organic`
+- Telegram-канал: `https://architecture.internoedu.uz/?utm_source=telegram&utm_medium=channel&utm_campaign=arch_ol_organic`
 
 ## События для оптимизации кампаний (Meta Pixel 4251277901808457)
 

@@ -3,8 +3,18 @@
 // resolution and applyLang() live in an inline <head> script in index.html so
 // localization applies synchronously before the hero is painted.
 
+// Языки — отдельные URL (/ и /uz/). Переход сохраняет UTM, город и якорь;
+// ?lang= убираем, чтобы язык задавала сама страница.
 document.querySelectorAll('.lang__btn').forEach(b=>{
-  b.addEventListener('click',()=>applyLang(b.dataset.lang));
+  b.addEventListener('click',e=>{
+    const href = b.getAttribute('href');
+    if(!href) return applyLang(b.dataset.lang);
+    e.preventDefault();
+    const q = new URLSearchParams(location.search);
+    q.delete('lang');
+    const qs = q.toString();
+    location.href = href + (qs ? '?' + qs : '') + location.hash;
+  });
 });
 
 // City switcher
@@ -448,7 +458,7 @@ function handleForm(form){
     fireLeadAnalytics(form, meta, eventId);
     // Fire amoCRM + Telegram in parallel; navigate as soon as both settle.
     await Promise.allSettled([ sendToAmo(form), sendToTelegram(form) ]);
-    window.location.href = 'thanks.html';
+    window.location.href = '/thanks.html';
   });
 }
 handleForm(document.getElementById('form'));
